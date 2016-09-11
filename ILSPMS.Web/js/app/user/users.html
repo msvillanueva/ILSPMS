@@ -1,0 +1,60 @@
+﻿<div class="clearfix">
+    <div class="view-header">
+        <add-button create="create()"></add-button>
+        <a ng-href="#/divisions" class="btn btn-primary"><i class="fa fa-link"></i> DIVISIONS</a>
+        <search-bar></search-bar>
+    </div>
+    <div class="mt20">
+        <table class="table table-striped responsive-utilities jambo_table bulk_action" st-table="users" st-safe-src="usersRowCollection">
+            <thead>
+                <tr class="headings">
+                    <th st-sort="FullName">FullName </th>
+                    <th st-sort="Username">Username </th>
+                    <th st-sort="Email">Email </th>
+                    <th st-sort="DivisionName">DivisionName </th>
+                    <th st-sort="RoleName">Account Type </th>
+                    <th st-sort="IsLocked" class="text-center">Locked </th>
+                    <th class="no-link last">
+                        <span class="nobr">Action</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="!loadingData && users.length == 0">
+                    <td colspan="9">
+                        <i class="icon-file-empty"></i>
+                        <span>No record to display</span>
+                    </td>
+                </tr>
+                <tr ng-if="loadingData">
+                    <td colspan="9">
+                        <i>&nbsp;Fetching data..</i>
+                        <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
+                    </td>
+                </tr>
+                <tr ng-repeat="row in users">
+                    <td>{{row.FullName}}</td>
+                    <td>{{row.Username | uppercase}}</td>
+                    <td><a href="mailto:{{row.Email}}?Subject=Personal%20message" target="_top">{{row.Email}}</a></td>
+                    <td>{{row.DivisionName}}</td>
+                    <td>{{row.RoleName}}</td>
+                    <td class="text-center">
+                        <i ng-if="row.IsLocked" class="fa fa-lock grid-item grid-lock pointer" ng-click="toggleLock(row, false)"></i>
+                        <i ng-if="!row.IsLocked" class="fa fa-unlock grid-item grid-lock-open pointer" ng-click="toggleLock(row, true)"></i>
+                    </td>
+                    <td class="last">
+                        <a class="btn btn-default" ng-click="create(row)"><i class="fa fa-edit"></i> View</a>
+                        <a class="btn btn-danger" ng-click="archive($index, row)"><i class="fa fa-trash"></i> Archive</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="9" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

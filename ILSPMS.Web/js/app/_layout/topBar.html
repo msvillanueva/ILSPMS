@@ -1,0 +1,31 @@
+﻿<div class="top-nav">
+    <div class="clearfix top-content nav_menu">
+        <div class="logo-img">
+            <img src="img/logo.png" />
+        </div>
+        <div class="logo">
+            <span>ILS-PMS</span>
+            <span class="sub-logo not-bold"></span>
+        </div>
+        <div class="pull-right nav">
+            <div class="pull-right pointer dropdown ">
+                <a href="javascript:;" class="user-profile dropdown-toggle top-icon top-menu-parent" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user"></i>&nbsp;&nbsp;
+                    <span><strong>{{ username }}</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-caret-down"></i>
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu pull-right top-menu-item">
+                    <li>
+                        <a ng-href="#/profile" class="sub-menu">  Profile</a>
+                    </li>
+                    <li>
+                        <a ng-href="#/change-password" class="sub-menu">  Change password</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" class="cursor-pointer sub-menu"> Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

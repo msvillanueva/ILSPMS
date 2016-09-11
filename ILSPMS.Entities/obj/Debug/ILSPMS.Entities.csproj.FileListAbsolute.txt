@@ -1,0 +1,5 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\bin\Debug\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\bin\Debug\ILSPMS.Entities.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Debug\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Debug\ILSPMS.Entities.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Debug\ILSPMS.Entities.csprojResolveAssemblyReference.cache

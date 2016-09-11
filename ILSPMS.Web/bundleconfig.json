@@ -1,0 +1,60 @@
+[
+  {
+    "outputFileName": "css/site.min.css",
+    "inputFiles": [
+      "css/**/*.css",
+      "!css/**/*min.css"
+    ],
+    "minify": {
+        "enabled": true,
+        "commentMode": "all"
+    }
+  },
+  {
+    "outputFileName": "js/vendors.min.js",
+    "inputFiles": [
+      "js/vendors/jquery.js",
+      "js/vendors/bootstrap.js",
+      "js/vendors/angular.js",
+      "js/vendors/toastr.js",
+      "js/vendors/angular-animate.js",
+      "js/vendors/angular-base64.js",
+      "js/vendors/angular-route.js",
+      "js/vendors/angular-cookies.js",
+      "js/vendors/angucomplete-alt.js",
+      "js/vendors/angular-file-upload.js",
+      "js/vendors/loading-bar.js",
+      "js/vendors/angular-validator.js",
+      "js/vendors/ui-bootstrap-tpls.js",
+      "js/vendors/jquery.fancybox.js",
+      "js/vendors/jquery.fancybox-media.js",
+      "js/vendors/smart-table.js",
+      "js/vendors/angular-cambria.js",
+      "js/vendors/clipboard.js",
+      "js/vendors/ngclipboard.js",
+      "js/vendors/angular-aria.js",
+      "js/vendors/angular-material.js"
+    ]
+  },
+  {
+    "outputFileName": "js/login.min.js",
+    "inputFiles": [
+      "js/app/modules/**/*.js",
+      "js/app/services/**/*.js",
+      "js/app/login.js",
+      "js/app/login/**/*.js"
+    ]
+  },
+  {
+    "outputFileName": "js/app.min.js",
+    "inputFiles": [
+      "js/app/modules/**/*.js",
+      "js/app/services/**/*.js",
+      "js/app/app.js",
+      "js/app/_layout/**/*.js",
+      "js/app/dashboard/**/*.js",
+      "js/app/user/**/*.js",
+      "js/app/division/**/*.js"
+    ]
+  }
+]

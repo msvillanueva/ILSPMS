@@ -1,0 +1,16 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Data.dll.config
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Data.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Data.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\EntityFramework.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\EntityFramework.xml
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.csprojResolveAssemblyReference.cache
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Common.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Common.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Entities.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.Migrations.init.resources
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.csproj.GenerateResource.Cache
