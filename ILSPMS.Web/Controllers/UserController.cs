@@ -29,7 +29,52 @@ namespace ILSPMS.Web.Controllers
         }
 
         [Route("{filter?}")]
+        [HttpGet]
         public HttpResponseMessage Get(HttpRequestMessage request, string filter = null)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<User> users = null;
+                List<User> selected = null;
+                int totalCount = 0;
+
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter = filter.Trim().ToLower();
+                    selected = _userRepository
+                        .FindBy(s => !s.Deleted && (s.FirstName.ToLower().Contains(filter.ToLower().Trim()) || s.LastName.ToLower().Contains(filter.ToLower().Trim())
+                            || s.Email.ToLower().Contains(filter.ToLower().Trim()) || s.Username.ToLower().Contains(filter.ToLower().Trim())))
+                        .ToList();
+                }
+                else
+                {
+                    selected = _userRepository
+                        .FindBy(s => !s.Deleted)
+                        .ToList();
+                }
+
+                var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
+
+                users = selected
+                    .Where(s => s.ID != currentUser.ID)
+                    .OrderBy(m => m.FirstName)
+                    .ToList();
+
+                totalCount = users.Count();
+
+                IEnumerable<UserViewModel> usersVM = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
+
+                response = request.CreateResponse(HttpStatusCode.OK, new { items = usersVM });
+
+                return response;
+            });
+        }
+
+        [Authorize(Roles = "Admin, Division Officer")]
+        [Route("pms")]
+        [HttpGet]
+        public HttpResponseMessage GetPMs(HttpRequestMessage request, string filter = null)
         {
             return CreateHttpResponse(request, () =>
             {

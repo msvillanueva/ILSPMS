@@ -11,6 +11,7 @@ namespace ILSPMS.Entities
         public int ID { get; set; }
         public string Name { get; set; }
         public int AddedByID { get; set; }
+        public int DivisionID { get; set; }
         public int? ProjectManagerID { get; set; }
         public decimal Budget { get; set; }
         public DateTime DateCreated { get; set; }
@@ -18,6 +19,7 @@ namespace ILSPMS.Entities
 
         public virtual User AddedBy { get; set; }
         public virtual User ProjectManager { get; set; }
+        public virtual Division Division { get; set; }
         public virtual ICollection<ProjectActivity> ProjectActivities { get; set; }
         public virtual ICollection<ProjectMovement> ProjectMovements { get; set; }
     }

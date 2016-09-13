@@ -399,7 +399,18 @@ body {
     font-weight:normal !important;
 }
 
+label.form-control {
+    width: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: 0;
+    background: inherit;
+}
 
+input[type="checkbox"].form-control {
+    margin: 0 !important;
+    box-shadow: none !important;
+}
 
 
 

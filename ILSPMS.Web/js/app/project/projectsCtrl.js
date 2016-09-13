@@ -1,23 +1,23 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('usersCtrl', usersCtrl);
-    usersCtrl.$inject = ['$scope', '$uibModal', 'apiService', 'notificationService', 'cambria'];
+    app.controller('projectsCtrl', projectsCtrl);
+    projectsCtrl.$inject = ['$scope', '$uibModal', 'apiService', 'notificationService', 'cambria'];
 
-    function usersCtrl($scope, $uibModal, apiService, notificationService, cambria) {
-        $scope.pageClass = 'page-users';
+    function projectsCtrl($scope, $uibModal, apiService, notificationService, cambria) {
+        $scope.pageClass = 'page-projects';
         $scope.loadingData = true;
         $scope.page = 0;
         $scope.pagesCount = 0;
-        $scope.users = [];
+        $scope.projects = [];
         $scope.tableRowCollection = [];
-        $scope.roles = [];
+        $scope.pms = [];
         $scope.divisions = [];
+        $scope.all = false;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.archive = archive;
-        $scope.toggleLock = toggleLock;
         $scope.create = create;
 
         function clearSearch() {
@@ -29,11 +29,12 @@
             $scope.loadingData = true;
             var config = {
                 params: {
-                    filter: $scope.filter
+                    filter: $scope.filter,
+                    all: $scope.all
                 }
             };
 
-            apiService.get('/api/users/', config,
+            apiService.get('/api/projects/', config,
                 loadComplete,
                 notificationService.responseFailed);
         }
@@ -45,15 +46,15 @@
             }
 
             $scope.tableRowCollection = result.data.items;
-            $scope.users = [].concat($scope.tableRowCollection);
+            $scope.projects = [].concat($scope.tableRowCollection);
         }
 
         function archive(idx, row) {
-            cambria.cConfirm('Archive this user account?', 'CONFIRM ACTION', function (click) {
+            cambria.cConfirm('Archive this project?', 'CONFIRM ACTION', function (click) {
                 if (click) {
-                    $scope.users.splice(idx, 1);
+                    $scope.projects.splice(idx, 1);
                     apiService.post(
-                        '/api/users/remove/',
+                        '/api/projects/remove/',
                         row,
                         function (response) {
                             if (response.data.success)
@@ -67,31 +68,16 @@
             });
         }
 
-        function toggleLock(row, lock) {
-            row.IsLocked = lock;
-            apiService.post(
-                '/api/users/lockunlock/',
-                row,
-                function (response) {
-                    if (response.data.success)
-                        notificationService.displaySuccess(row.FullName + '\'s account is now ' + (lock ? 'locked.' : 'unlocked.'));
-                    else
-                        notificationService.displayError(response.data.message);
-                },
-                notificationService.responseFailed
-            );
-        }
-
         function create(row) {
-            
+
             if (row)
                 $scope.viewModel = angular.copy(row);
             else
-                $scope.viewModel = { ID: 0, RoleID: $scope.roles[1].ID };
+                $scope.viewModel = { ID: 0 };
 
             $uibModal.open({
-                templateUrl: 'js/app/user/userViewModal.html',
-                controller: 'userViewModalCtrl',
+                templateUrl: 'js/app/project/projectViewModal.html',
+                controller: 'projectViewModalCtrl',
                 scope: $scope,
                 backdrop: 'static',
                 keyboard: false
@@ -101,7 +87,6 @@
             });
         }
 
-
         function init() {
             apiService.get('/api/divisions/', null,
                 function (result) {
@@ -109,9 +94,9 @@
                 },
                 notificationService.responseFailed);
 
-            apiService.get('/api/roles/', null,
+            apiService.get('/api/users/pms', null,
                 function (result) {
-                    $scope.roles = result.data.items;
+                    $scope.pms = result.data.items;
                 },
                 notificationService.responseFailed);
 

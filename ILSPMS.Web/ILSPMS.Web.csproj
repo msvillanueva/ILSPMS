@@ -154,6 +154,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,6 +171,7 @@
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Models\DivisionViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,6 +204,8 @@
     <Content Include="js\app\login\loginFormCtrl.js" />
     <Content Include="js\app\modules\common.core.js" />
     <Content Include="js\app\modules\common.ui.js" />
+    <Content Include="js\app\project\projectViewModal.html" />
+    <Content Include="js\app\project\projectViewModalCtrl.js" />
     <Content Include="js\app\services\apiService.js" />
     <Content Include="js\app\services\fileUploadService.js" />
     <Content Include="js\app\services\membershipService.js" />
@@ -220,6 +224,8 @@
     <Content Include="js\app\_layout\topBar.html" />
     <Content Include="js\app\_layout\_root.js" />
     <Content Include="js\login.min.js" />
+    <Content Include="js\app\project\projects.html" />
+    <Content Include="js\app\project\projectsCtrl.js" />
     <Content Include="js\vendors.min.js" />
     <Content Include="js\vendors\angucomplete-alt.js" />
     <Content Include="js\vendors\angular-animate.js" />

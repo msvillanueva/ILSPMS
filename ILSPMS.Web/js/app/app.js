@@ -29,7 +29,7 @@
                 resolve: isLoggedAdmin
             })
             .when("/projects", {
-                title: 'Users Management',
+                title: 'Projects Management',
                 templateUrl: "js/app/project/projects.html",
                 controller: "projectsCtrl",
                 menu: '#menuProjects',

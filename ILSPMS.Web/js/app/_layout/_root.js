@@ -12,6 +12,7 @@
         $scope.role = 0;
         $scope.username = '';
         $scope.isAdmin = false;
+        $scope.year = (new Date()).getFullYear();
 
         $scope.displayUserInfo = displayUserInfo;
         $scope.logout = logout;

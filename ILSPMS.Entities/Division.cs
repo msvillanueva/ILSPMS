@@ -11,6 +11,7 @@ namespace ILSPMS.Entities
         public Division()
         {
             Users = new List<User>();
+            Projects = new List<Project>();
         }
 
         public int ID { get; set; }
@@ -18,5 +19,6 @@ namespace ILSPMS.Entities
         public bool Deleted { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

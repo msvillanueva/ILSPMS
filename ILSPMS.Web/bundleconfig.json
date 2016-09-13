@@ -54,7 +54,8 @@
       "js/app/_layout/**/*.js",
       "js/app/dashboard/**/*.js",
       "js/app/user/**/*.js",
-      "js/app/division/**/*.js"
+      "js/app/division/**/*.js",
+      "js/app/project/**/*.js"
     ]
   }
 ]

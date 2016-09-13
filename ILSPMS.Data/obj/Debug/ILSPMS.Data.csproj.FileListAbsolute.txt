@@ -14,3 +14,4 @@ D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Common.pdb
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\bin\Debug\ILSPMS.Entities.pdb
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.Migrations.init.resources
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.csproj.GenerateResource.Cache
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Data\obj\Debug\ILSPMS.Data.Migrations.Project_edit.resources

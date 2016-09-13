@@ -21,6 +21,10 @@ namespace ILSPMS.Data
             HasMany(s => s.Users)
                 .WithOptional(s => s.Division)
                 .HasForeignKey(s => s.DivisionID);
+
+            HasMany(s => s.Projects)
+                .WithRequired(s => s.Division)
+                .HasForeignKey(s => s.DivisionID);
         }
     }
 }

@@ -18,6 +18,9 @@ namespace ILSPMS.Data
             Property(s => s.AddedByID)
                 .IsRequired();
 
+            Property(s => s.DivisionID)
+                .IsRequired();
+
             Property(s => s.ProjectManagerID)
                 .IsOptional();
 

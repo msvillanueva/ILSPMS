@@ -57,7 +57,7 @@
     </div>
     <div class="panel-footer clearfix">
         <div class="pull-right">
-            <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="fillupForm.$invalid || dataLoading">{{coupon.ID > 0 ? "Update" : "Create"}}</button>
+            <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="fillupForm.$invalid || dataLoading">{{viewModel.ID > 0 ? "Update" : "Create"}}</button>
             <button type="button" class="btn btn-default" ng-click="close()" ng-disabled="dataLoading">Close</button>
         </div>
     </div>
