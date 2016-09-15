@@ -14,6 +14,18 @@
                 controller: "dashboardCtrl",
                 menu: '#menuDashboard'
             })
+            .when("/profile", {
+                title: 'Profile',
+                templateUrl: "js/app/profile/profile.html",
+                controller: "profileCtrl",
+                menu: '#menuDashboard'
+            })
+            .when("/change-password", {
+                title: 'Change password',
+                templateUrl: "js/app/profile/password.html",
+                controller: "passwordCtrl",
+                menu: '#menuDashboard'
+            })
             .when("/users", {
                 title: 'Users Management',
                 templateUrl: "js/app/user/users.html",
@@ -34,6 +46,13 @@
                 controller: "projectsCtrl",
                 menu: '#menuProjects',
                 resolve: isLoggedAdmin
+            })
+            .when("/my-projects", {
+                title: 'Projects Management',
+                templateUrl: "js/app/myproject/myProjects.html",
+                controller: "myProjectsCtrl",
+                menu: '#menuMyProjects',
+                resolve: isLoggedNotAdmin
             })
             .otherwise({ redirectTo: "/" });
 

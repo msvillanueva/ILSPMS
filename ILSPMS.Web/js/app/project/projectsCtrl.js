@@ -58,7 +58,7 @@
                         row,
                         function (response) {
                             if (response.data.success)
-                                notificationService.displaySuccess(row.FullName + ' was removed from the list.');
+                                notificationService.displaySuccess(row.Name + ' was removed from the list.');
                             else
                                 notificationService.displayError(response.data.message);
                         },

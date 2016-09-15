@@ -12,11 +12,14 @@
         $scope.role = 0;
         $scope.username = '';
         $scope.isAdmin = false;
+        $scope.isPM = false;
+        $scope.isDiv = false;
         $scope.year = (new Date()).getFullYear();
 
         $scope.displayUserInfo = displayUserInfo;
         $scope.logout = logout;
         $scope.formatDate = formatDate;
+        $scope.filterValue = filterValue;
 
         function displayUserInfo() {
             $scope.userData.isUserLoggedIn = membershipService.isUserLoggedIn();
@@ -25,6 +28,8 @@
                 $scope.role = $rootScope.repository.loggedUser.role;
                 $scope.userData.id = $rootScope.repository.loggedUser.id;
                 $scope.isAdmin = $rootScope.repository.loggedUser.role == 1;
+                $scope.isPM = $rootScope.repository.loggedUser.role == 2;
+                $scope.isPM = $rootScope.repository.loggedUser.role == 3;
             }
             else {
                 logout();
@@ -39,6 +44,12 @@
         function formatDate(date) {
             var dateOut = new Date(date);
             return dateOut;
+        };
+
+        function filterValue($event) {
+            if (isNaN(String.fromCharCode($event.keyCode))) {
+                $event.preventDefault();
+            }
         };
 
         $scope.displayUserInfo();

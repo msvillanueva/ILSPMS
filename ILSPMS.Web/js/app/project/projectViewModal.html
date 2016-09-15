@@ -24,6 +24,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 selectContainer">
+                                <label class="control-label" for="pms">Project manager</label>
+                                <select ng-model="viewModel.ProjectManagerID" class="form-control black" ng-options="option.ID as option.FullName for option in pms"></select>
+                                <input type="hidden" name="ProjectManagerID" ng-value="viewModel.ProjectManagerID" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 selectContainer">
+                                <label class="control-label" for="budget">Budget</label>
+                                <input type="number" class="form-control" ng-model="viewModel.Budget" name="budget" id="budget" placeholder="0"
+                                       validate-on="blur" required required-message="'Budget is required'" ng-keypress="filterValue($event)">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

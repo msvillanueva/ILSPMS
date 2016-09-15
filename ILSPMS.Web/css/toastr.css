@@ -80,7 +80,7 @@ button.toast-close-button {
 }
 .toast-bottom-left {
   bottom: 12px;
-  left: 12px;
+  left: 61px; /*12px;*/
 }
 #toast-container {
   position: fixed;

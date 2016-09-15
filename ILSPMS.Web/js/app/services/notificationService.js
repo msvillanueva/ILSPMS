@@ -7,7 +7,7 @@
 
         toastr.options = {
             "debug": false,
-            "positionClass": "toast-top-right",
+            "positionClass": "toast-bottom-left",
             "onclick": null,
             "fadeIn": 300,
             "fadeOut": 1000,

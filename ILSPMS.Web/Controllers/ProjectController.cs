@@ -18,13 +18,16 @@ namespace ILSPMS.Web.Controllers
     {
         private readonly IEntityBaseRepository<Project> _projectRepository;
         private readonly IEntityBaseRepository<User> _userRepository;
+        private readonly IEntityBaseRepository<Division> _divisionRepository;
 
         public ProjectController(IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork,
-            IEntityBaseRepository<Project> projectRepository, IEntityBaseRepository<User> userRepository
+            IEntityBaseRepository<Project> projectRepository, IEntityBaseRepository<User> userRepository,
+            IEntityBaseRepository<Division> divisionRepository
             ) : base (_errorsRepository, _unitOfWork)
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
+            _divisionRepository = divisionRepository;
         }
 
         [Route("{filter?}/{all?}")]
@@ -111,7 +114,13 @@ namespace ILSPMS.Web.Controllers
                         _unitOfWork.Commit();
                         model.ID = project.ID;
                     }
-                    response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = model });
+                    var obj = _projectRepository.GetSingle(model.ID);
+                    var item = Mapper.Map<ProjectViewModel>(obj);
+                    var pm = _userRepository.GetSingle(obj.ProjectManagerID.HasValue ? (int)obj.ProjectManagerID : 0);
+                    item.ProjectManager = pm != null ? $"{pm.FirstName} {pm.LastName}" : "";
+                    item.DivisionName = _divisionRepository.GetSingle(item.DivisionID).Name;
+
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = item });
                 }
                 else
                     response = request.CreateResponse(HttpStatusCode.OK, new { success = false });

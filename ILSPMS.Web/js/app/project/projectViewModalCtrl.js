@@ -24,7 +24,7 @@
         function saveCompleted(response) {
             $scope.dataLoading = false;
             if (response.data.success) {
-
+                console.log(response.data.item);
                 if ($scope.viewModel.ID == 0) {
                     notificationService.displaySuccess('New project has been added successfully.');
                     $scope.projects.push(angular.copy(response.data.item));
@@ -42,16 +42,13 @@
         }
 
         function updateRow(item) {
-            angular.forEach($scope.users, function (row, key) {
+            angular.forEach($scope.projects, function (row, key) {
                 if (row.ID == $scope.viewModel.ID) {
-                    row.FirstName = item.FirstName;
-                    row.LastName = item.LastName;
-                    row.FullName = item.FullName;
-                    row.Email = item.Email;
+                    row.Name = item.Name;
                     row.DivisionName = item.DivisionName;
-                    row.RoleName = item.RoleName;
-                    row.RoleID = item.RoleID;
-                    row.DivisionID = item.DivisionID;
+                    row.ProjectManager = item.ProjectManager;
+                    row.Budget = item.Budget;
+                    row.Year = item.Year;
                 }
             });
             $scope.viewModel = {};

@@ -171,6 +171,7 @@
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Models\DivisionViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\PasswordViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -204,6 +205,12 @@
     <Content Include="js\app\login\loginFormCtrl.js" />
     <Content Include="js\app\modules\common.core.js" />
     <Content Include="js\app\modules\common.ui.js" />
+    <Content Include="js\app\myproject\myProjects.html" />
+    <Content Include="js\app\myproject\myProjectsCtrl.js" />
+    <Content Include="js\app\profile\password.html" />
+    <Content Include="js\app\profile\password.js" />
+    <Content Include="js\app\profile\profile.html" />
+    <Content Include="js\app\profile\profileCtrl.js" />
     <Content Include="js\app\project\projectViewModal.html" />
     <Content Include="js\app\project\projectViewModalCtrl.js" />
     <Content Include="js\app\services\apiService.js" />
