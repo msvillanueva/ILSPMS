@@ -21,14 +21,15 @@ namespace ILSPMS.Data
             Property(s => s.Order)
                 .IsRequired();
 
-            Property(s => s.ApproverRoleID)
-                .IsOptional();
-
             HasMany(s => s.ProjectMovements)
                 .WithRequired(s => s.Milestone)
                 .HasForeignKey(s => s.MilestoneID);
 
             HasMany(s => s.ProjectActivities)
+                .WithRequired(s => s.Milestone)
+                .HasForeignKey(s => s.MilestoneID);
+
+            HasMany(s => s.ApproverFlowByRoles)
                 .WithRequired(s => s.Milestone)
                 .HasForeignKey(s => s.MilestoneID);
         }

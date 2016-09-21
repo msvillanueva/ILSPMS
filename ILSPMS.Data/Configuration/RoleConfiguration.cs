@@ -23,13 +23,17 @@ namespace ILSPMS.Data
                 .HasForeignKey(s => s.RoleID);
 
             HasMany(s => s.ApproverFlowByRoles)
-                .WithRequired(s => s.Approver)
-                .HasForeignKey(s => s.ApproverID);
+                .WithRequired(s => s.ApproverRole)
+                .HasForeignKey(s => s.ApproverRoleID);
 
             HasMany(s => s.NextApproverFlowByRoles)
-                .WithOptional(s => s.NextApprover)
-                .HasForeignKey(s => s.NextApproverID)
+                .WithOptional(s => s.NextApproverRole)
+                .HasForeignKey(s => s.NextApproverRoleID)
                 .WillCascadeOnDelete(false);
+
+            HasMany(s => s.ApprovedProjectMovements)
+                .WithOptional(s => s.ApproverRole)
+                .HasForeignKey(s => s.ApproverRoleID);
         }
     }
 }

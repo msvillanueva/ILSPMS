@@ -3,6 +3,12 @@
         <add-button create="create()"></add-button>
         <search-bar></search-bar>
         <div class="input-group pull-right ms20">
+            <select class="form-control" ng-model="divisionID" ng-change="search()">
+                <option value="0" label="All divisions" selected>All Divisions</option>
+                <option ng-repeat="row in divisions" label="{{row.Name}}" value="{{row.ID}}">{{row.Name}}</option>
+            </select>
+        </div>
+        <div class="input-group pull-right">
             <input class="form-control w20" type="checkbox" value="all" id="chkAll" ng-model="all" ng-click="search()" /><label for="chkAll" class="form-control">Show previous projects</label>
         </div>
     </div>

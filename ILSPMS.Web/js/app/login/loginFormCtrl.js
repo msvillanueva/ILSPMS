@@ -13,7 +13,7 @@
                             window.location.href = 'index.html';
                         } else {
                             notificationService.displayError('Invalid Login');
-                            $scope.user.Password = '';
+                            $scope.user.password = '';
                             $scope.error = response.message;
                             $scope.dataLoading = false;
                         }

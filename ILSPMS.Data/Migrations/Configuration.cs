@@ -21,6 +21,7 @@ namespace ILSPMS.Data.Migrations
             context.UserSet.AddOrUpdate(CreateSystemAdmin());
             context.ProjectmovementTypeSet.AddOrUpdate(GenerateProjectMovementTypes());
             context.MilestoneSet.AddOrUpdate(GenerateMilestones());
+            context.ApproverFlowByRoleSet.AddOrUpdate(GenerateApproverFlowByRoles());
         }
 
         private Role[] GenerateRoles()
@@ -77,68 +78,177 @@ namespace ILSPMS.Data.Migrations
             {
                 ID = 1,
                 Name = "Research Assignment",
-                Order = 1,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 1
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 2,
                 Name = "Concept Note Drafting",
-                Order = 2,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 2
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 3,
                 Name = "Data Gathering",
-                Order = 3,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 3
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 4,
                 Name = "Research Paper Drafting",
-                Order = 4,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 4
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 5,
-                Name = "Proofreading",
-                Order = 5,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Name = "Proof Reading",
+                Order = 5
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 6,
                 Name = "Layouting",
-                Order = 6,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 6
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 7,
                 Name = "Publishing",
-                Order = 7,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 7
             });
 
             milestones.Add(new Milestone()
             {
                 ID = 8,
                 Name = "Published",
-                Order = 8,
-                ApproverRoleID = (int)Enumerations.Role.DivisionOfficer
+                Order = 8
             });
 
-
             return milestones.ToArray();
+        }
+
+        private ApproverFlowByRole[] GenerateApproverFlowByRoles()
+        {
+            var list = new List<ApproverFlowByRole>();
+
+            //Concept Note Drafting
+            list.Add(new ApproverFlowByRole() {
+                ID = 1,
+                MilestoneID = 2,
+                ApproverRoleID = (int)Enumerations.Role.DivisionChief,
+                NextApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                IsInitial = true
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 2,
+                MilestoneID = 2,
+                ApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                NextApproverRoleID = (int)Enumerations.Role.ExecDir,
+                IsInitial = false
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 3,
+                MilestoneID = 2,
+                ApproverRoleID = (int)Enumerations.Role.ExecDir,
+                NextApproverRoleID = null,
+                IsInitial = false
+            });
+
+            //Research Paper Drafting
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 4,
+                MilestoneID = 4,
+                ApproverRoleID = (int)Enumerations.Role.DivisionChief,
+                NextApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                IsInitial = true
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 5,
+                MilestoneID = 4,
+                ApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                NextApproverRoleID = (int)Enumerations.Role.ExecDir,
+                IsInitial = false
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 6,
+                MilestoneID = 4,
+                ApproverRoleID = (int)Enumerations.Role.ExecDir,
+                NextApproverRoleID = null,
+                IsInitial = false
+            });
+
+            //Proof reading
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 7,
+                MilestoneID = 5,
+                ApproverRoleID = (int)Enumerations.Role.DivisionChief,
+                NextApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                IsInitial = true
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 8,
+                MilestoneID = 5,
+                ApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                NextApproverRoleID = (int)Enumerations.Role.ExecDir,
+                IsInitial = false
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 9,
+                MilestoneID = 5,
+                ApproverRoleID = (int)Enumerations.Role.ExecDir,
+                NextApproverRoleID = null,
+                IsInitial = false
+            });
+
+            //Layouting
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 10,
+                MilestoneID = 6,
+                ApproverRoleID = (int)Enumerations.Role.DivisionChief,
+                NextApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                IsInitial = true
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 11,
+                MilestoneID = 6,
+                ApproverRoleID = (int)Enumerations.Role.DeputyExecDir,
+                NextApproverRoleID = (int)Enumerations.Role.ExecDir,
+                IsInitial = false
+            });
+
+            list.Add(new ApproverFlowByRole()
+            {
+                ID = 12,
+                MilestoneID = 6,
+                ApproverRoleID = (int)Enumerations.Role.ExecDir,
+                NextApproverRoleID = null,
+                IsInitial = false
+            });
+
+            return list.ToArray();
         }
     }
 }

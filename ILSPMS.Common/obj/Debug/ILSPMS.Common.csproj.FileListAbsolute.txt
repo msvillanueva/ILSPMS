@@ -1,5 +1,4 @@
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\bin\Debug\ILSPMS.Common.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\bin\Debug\ILSPMS.Common.pdb
-D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Debug\ILSPMS.Common.csprojResolveAssemblyReference.cache
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Debug\ILSPMS.Common.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Debug\ILSPMS.Common.pdb

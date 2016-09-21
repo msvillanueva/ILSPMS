@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-xs-12 selectContainer">
                                 <label class="control-label" for="pms">Project manager</label>
-                                <select ng-model="viewModel.ProjectManagerID" class="form-control black" ng-options="option.ID as option.FullName for option in pms"></select>
+                                <select ng-model="viewModel.ProjectManagerID" class="form-control black" ng-options="option.ID as option.FullName for option in pms | filter:{DivisionID:viewModel.DivisionID}"></select>
                                 <input type="hidden" name="ProjectManagerID" ng-value="viewModel.ProjectManagerID" />
                             </div>
                         </div>

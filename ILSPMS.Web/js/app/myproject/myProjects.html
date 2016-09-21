@@ -1,9 +1,39 @@
 ﻿<div class="clearfix">
     <div class="view-header">
-        <add-button create="create()"></add-button>
         <search-bar></search-bar>
+        <div class="input-group pull-right">
+            <input class="form-control w20" type="checkbox" value="all" id="chkAll" ng-model="all" ng-click="search()" /><label for="chkAll" class="form-control">Show previous projects</label>
+        </div>
     </div>
-    <div class="mt20">
+    <div class="mt20 boxes-container">
+        <div class="col-lg-12 mt20" ng-if="!loadingData && projects.length == 0">
+            <i class="fa fa-file-o"></i>
+            <span>No record to display</span>
+        </div>
+        <div class="col-lg-12 mt20" ng-if="loadingData">
+            <i>&nbsp;Fetching data..</i>
+            <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
+        </div>
+        <div class="col-sm-4 mt20" ng-repeat="row in projects">
+            <div class="card-item" ng-mouseenter="popMenu($event, row)" ng-mouseleave="hideMenu($event, row)">
+                <div class="row">
+                    <div class="staff-icon pull-left ps10">
+                        <i class="icon-user3 "></i>
+                    </div>
+                    <div class="pull-left mt10">
+                        <p class="staff-name">{{ row.Name }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="ps10"></span>
+                    </div>
+                </div>
 
+                <div class="item-card-menu ngFade" ng-if="row.Hovered">
+                    <a class="btn btn-lg btn-default" ng-click="view(row)"><i class="icon-edit3"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

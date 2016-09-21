@@ -14,5 +14,6 @@ namespace ILSPMS.Entities
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<ApproverFlowByRole> ApproverFlowByRoles { get; set; }
         public virtual ICollection<ApproverFlowByRole> NextApproverFlowByRoles { get; set; }
+        public virtual ICollection<ProjectMovement> ApprovedProjectMovements { get; set; }
     }
 }

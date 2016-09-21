@@ -14,6 +14,7 @@
         $scope.pms = [];
         $scope.divisions = [];
         $scope.all = false;
+        $scope.divisionID = '0';
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
@@ -30,10 +31,11 @@
             var config = {
                 params: {
                     filter: $scope.filter,
-                    all: $scope.all
+                    all: $scope.all,
+                    divisionID: $scope.divisionID
                 }
             };
-
+            
             apiService.get('/api/projects/', config,
                 loadComplete,
                 notificationService.responseFailed);

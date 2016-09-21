@@ -12,6 +12,8 @@
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
+        $scope.popMenu = popMenu;
+        $scope.hideMenu = hideMenu;
 
         function clearSearch() {
             $scope.filter = '';
@@ -21,7 +23,15 @@
         function search() {
             $scope.loadingData = true;
 
-            apiService.get('/api/myprojects/', null,
+            var config = {
+                params: {
+                    filter: $scope.filter,
+                    all: $scope.all,
+                    divisionID: null
+                }
+            };
+
+            apiService.get('/api/projects/', config,
                 loadComplete,
                 notificationService.responseFailed);
         }
@@ -32,8 +42,15 @@
                 notificationService.displayInfo(result.data.items.length + (result.data.items.length > 1 ? ' records found' : ' record found'));
             }
 
-            $scope.tableRowCollection = result.data.items;
-            $scope.divisions = [].concat($scope.tableRowCollection);
+            $scope.projects = result.data.items;
+        }
+
+        function popMenu($event, row) {
+            row.Hovered = true;
+        }
+
+        function hideMenu($event, row) {
+            row.Hovered = false;
         }
 
         $scope.search();

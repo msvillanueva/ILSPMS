@@ -48,7 +48,7 @@
                 resolve: isLoggedAdmin
             })
             .when("/my-projects", {
-                title: 'Projects Management',
+                title: 'My Projects',
                 templateUrl: "js/app/myproject/myProjects.html",
                 controller: "myProjectsCtrl",
                 menu: '#menuMyProjects',

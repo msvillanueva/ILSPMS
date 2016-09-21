@@ -69,8 +69,8 @@ namespace ILSPMS.Data
                 .HasForeignKey(s => s.ProjectManagerID);
 
             HasMany(s => s.ApprovedProjectMovements)
-                .WithOptional(s => s.Approver)
-                .HasForeignKey(s => s.ApproverID);
+                .WithOptional(s => s.ApproverUser)
+                .HasForeignKey(s => s.ApproverUserID);
         }
     }
 }

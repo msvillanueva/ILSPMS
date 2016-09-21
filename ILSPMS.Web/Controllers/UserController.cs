@@ -19,13 +19,16 @@ namespace ILSPMS.Web.Controllers
     {
         private readonly IEntityBaseRepository<User> _userRepository;
         private readonly IEncryptionService _encryptionService;
+        private readonly IEntityBaseRepository<Division> _divisionRepository;
 
         public UserController(IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork,
-            IEntityBaseRepository<User> userRepository, IEncryptionService encryptionService
+            IEntityBaseRepository<User> userRepository, IEncryptionService encryptionService,
+            IEntityBaseRepository<Division> divisionRepository
             ) : base(_errorsRepository, _unitOfWork)
         {
             _userRepository = userRepository;
             _encryptionService = encryptionService;
+            _divisionRepository = divisionRepository;
         }
 
         [Route("{filter?}")]
@@ -122,40 +125,42 @@ namespace ILSPMS.Web.Controllers
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
+            HttpResponseMessage response = null;
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                if (_userRepository.FindBy(s => s.Email.Trim().ToLower() == model.Email.ToLower().Trim()).FirstOrDefault() == null)
                 {
-                    if (_userRepository.FindBy(s => s.Email.Trim().ToLower() == model.Email.ToLower().Trim()).FirstOrDefault() == null)
+                    var salt = _encryptionService.CreateSalt();
+                    var pass = _encryptionService.GenerateCode(6);
+                    var newUser = new User()
                     {
-                        var salt = _encryptionService.CreateSalt();
-                        var pass = _encryptionService.GenerateCode(6);
-                        var newUser = new User()
-                        {
-                            DivisionID = model.DivisionID,
-                            LastName = model.LastName,
-                            FirstName = model.FirstName,
-                            Username = "",
-                            Email = model.Email,
-                            HashedPassword = _encryptionService.EncryptPassword(pass, salt),
-                            Salt = salt,
-                            RoleID = model.RoleID,
-                            IsLocked = false,
-                            Deleted = false,
-                            DateCreated = DateTime.Now
-                        };
+                        DivisionID = model.DivisionID,
+                        LastName = model.LastName,
+                        FirstName = model.FirstName,
+                        Username = "",
+                        Email = model.Email,
+                        HashedPassword = _encryptionService.EncryptPassword(pass, salt),
+                        Salt = salt,
+                        RoleID = model.RoleID,
+                        IsLocked = false,
+                        Deleted = false,
+                        DateCreated = DateTime.Now
+                    };
 
-                        _userRepository.Add(newUser);
-                        _unitOfWork.Commit();
+                    _userRepository.Add(newUser);
+                    _unitOfWork.Commit();
 
-                        var email = new EmailSender()
-                        {
-                            RecipientName = $"{model.FirstName} {model.LastName}",
-                            To = new List<string>() { model.Email }
-                        };
-                        //email.SendAcceptRegistrationAsync(pass);
-                        var objUser = _userRepository.GetSingle(newUser.ID);
-                        var userVM = Mapper.Map<UserViewModel>(objUser);
+                    var email = new EmailSender()
+                    {
+                        RecipientName = $"{model.FirstName} {model.LastName}",
+                        To = new List<string>() { model.Email }
+                    };
+                    //email.SendAcceptRegistrationAsync(pass);
+                    var objUser = _userRepository.GetSingle(newUser.ID);
+                    var userVM = Mapper.Map<UserViewModel>(objUser);
+                    userVM.DivisionName = model.DivisionID.HasValue ? _divisionRepository.GetSingle((int)model.DivisionID).Name : "";
+                    userVM.RoleName = EnumerationHelper.GetEnumDescription((Enumerations.Role)model.RoleID);
 
                         response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = userVM });
                     }

@@ -15,15 +15,17 @@ namespace ILSPMS.Entities
         public int ProjectMovementTypeID { get; set; }
         public bool IsSubmitted { get; set; }
         public bool IsApproved { get; set; }
-        public int? ApproverID { get; set; }
+        public int? ApproverRoleID { get; set; }
+        public int? ApproverUserID { get; set; }
         public DateTime? DateSubmitted { get; set; }
         public DateTime? DateApproved { get; set; }
         public DateTime DateCreated { get; set; }
 
         public virtual Project Project { get; set; }
         public virtual Milestone Milestone { get; set; }
-        public virtual User Approver { get; set; }
+        public virtual Role ApproverRole { get; set; }
         public virtual User ProjectManager { get; set; }
+        public virtual User ApproverUser { get; set; }
         public virtual ProjectMovementType ProjectMovementType { get; set; }
     }
 }

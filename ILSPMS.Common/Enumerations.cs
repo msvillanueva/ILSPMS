@@ -17,8 +17,8 @@ namespace ILSPMS.Common
             [Description("Project Manager")]
             PM = 2,
 
-            [Description("Division Officer")]
-            DivisionOfficer = 3,
+            [Description("Division Chief")]
+            DivisionChief = 3,
 
             [Description("Duputy Executive Director")]
             DeputyExecDir = 4,

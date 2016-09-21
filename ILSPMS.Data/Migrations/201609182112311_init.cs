@@ -12,14 +12,18 @@ namespace ILSPMS.Data.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        ApproverID = c.Int(nullable: false),
-                        NextApproverID = c.Int(),
+                        MilestoneID = c.Int(nullable: false),
+                        ApproverRoleID = c.Int(nullable: false),
+                        NextApproverRoleID = c.Int(),
+                        IsInitial = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Role", t => t.ApproverID, cascadeDelete: true)
-                .ForeignKey("dbo.Role", t => t.NextApproverID)
-                .Index(t => t.ApproverID)
-                .Index(t => t.NextApproverID);
+                .ForeignKey("dbo.Milestone", t => t.MilestoneID, cascadeDelete: true)
+                .ForeignKey("dbo.Role", t => t.ApproverRoleID, cascadeDelete: true)
+                .ForeignKey("dbo.Role", t => t.NextApproverRoleID)
+                .Index(t => t.MilestoneID)
+                .Index(t => t.ApproverRoleID)
+                .Index(t => t.NextApproverRoleID);
             
             CreateTable(
                 "dbo.Role",
@@ -29,6 +33,37 @@ namespace ILSPMS.Data.Migrations
                         Name = c.String(nullable: false, maxLength: 100),
                     })
                 .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.ProjectMovement",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ProjectID = c.Int(nullable: false),
+                        ProjectManagerID = c.Int(nullable: false),
+                        MilestoneID = c.Int(nullable: false),
+                        ProjectMovementTypeID = c.Int(nullable: false),
+                        IsSubmitted = c.Boolean(nullable: false),
+                        IsApproved = c.Boolean(nullable: false),
+                        ApproverRoleID = c.Int(),
+                        ApproverUserID = c.Int(),
+                        DateSubmitted = c.DateTime(),
+                        DateApproved = c.DateTime(),
+                        DateCreated = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.User", t => t.ApproverUserID)
+                .ForeignKey("dbo.Milestone", t => t.MilestoneID, cascadeDelete: true)
+                .ForeignKey("dbo.Project", t => t.ProjectID, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.ProjectManagerID, cascadeDelete: true)
+                .ForeignKey("dbo.ProjectMovementType", t => t.ProjectMovementTypeID, cascadeDelete: true)
+                .ForeignKey("dbo.Role", t => t.ApproverRoleID)
+                .Index(t => t.ProjectID)
+                .Index(t => t.ProjectManagerID)
+                .Index(t => t.MilestoneID)
+                .Index(t => t.ProjectMovementTypeID)
+                .Index(t => t.ApproverRoleID)
+                .Index(t => t.ApproverUserID);
             
             CreateTable(
                 "dbo.User",
@@ -54,45 +89,35 @@ namespace ILSPMS.Data.Migrations
                 .Index(t => t.RoleID);
             
             CreateTable(
-                "dbo.ProjectMovement",
+                "dbo.Project",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        ProjectID = c.Int(nullable: false),
-                        ProjectManagerID = c.Int(nullable: false),
-                        MilestoneID = c.Int(nullable: false),
-                        ProjectMovementTypeID = c.Int(nullable: false),
-                        IsSubmitted = c.Boolean(nullable: false),
-                        IsApproved = c.Boolean(nullable: false),
-                        ApproverID = c.Int(),
-                        DateSubmitted = c.DateTime(),
-                        DateApproved = c.DateTime(),
+                        Name = c.String(nullable: false, maxLength: 150),
+                        AddedByID = c.Int(nullable: false),
+                        DivisionID = c.Int(nullable: false),
+                        ProjectManagerID = c.Int(),
+                        Budget = c.Decimal(nullable: false, precision: 18, scale: 2),
                         DateCreated = c.DateTime(nullable: false),
+                        Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Project", t => t.ProjectID, cascadeDelete: true)
-                .ForeignKey("dbo.Milestone", t => t.MilestoneID, cascadeDelete: true)
-                .ForeignKey("dbo.ProjectMovementType", t => t.ProjectMovementTypeID, cascadeDelete: true)
-                .ForeignKey("dbo.User", t => t.ApproverID)
-                .ForeignKey("dbo.User", t => t.ProjectManagerID, cascadeDelete: true)
-                .Index(t => t.ProjectID)
-                .Index(t => t.ProjectManagerID)
-                .Index(t => t.MilestoneID)
-                .Index(t => t.ProjectMovementTypeID)
-                .Index(t => t.ApproverID);
+                .ForeignKey("dbo.Division", t => t.DivisionID, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.AddedByID)
+                .ForeignKey("dbo.User", t => t.ProjectManagerID)
+                .Index(t => t.AddedByID)
+                .Index(t => t.DivisionID)
+                .Index(t => t.ProjectManagerID);
             
             CreateTable(
-                "dbo.Milestone",
+                "dbo.Division",
                 c => new
                     {
-                        ID = c.Int(nullable: false),
+                        ID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 100),
-                        Order = c.Int(nullable: false),
-                        ApproverRoleID = c.Int(),
+                        Deleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Role", t => t.ApproverRoleID)
-                .Index(t => t.ApproverRoleID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.ProjectActivity",
@@ -108,30 +133,22 @@ namespace ILSPMS.Data.Migrations
                         Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Project", t => t.ProjectID, cascadeDelete: true)
                 .ForeignKey("dbo.Milestone", t => t.MilestoneID, cascadeDelete: true)
+                .ForeignKey("dbo.Project", t => t.ProjectID, cascadeDelete: true)
                 .ForeignKey("dbo.User", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.ProjectID)
                 .Index(t => t.MilestoneID)
                 .Index(t => t.UserID);
             
             CreateTable(
-                "dbo.Project",
+                "dbo.Milestone",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 150),
-                        AddedByID = c.Int(nullable: false),
-                        ProjectManagerID = c.Int(),
-                        Budget = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        DateCreated = c.DateTime(nullable: false),
-                        Deleted = c.Boolean(nullable: false),
+                        ID = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        Order = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.User", t => t.AddedByID)
-                .ForeignKey("dbo.User", t => t.ProjectManagerID)
-                .Index(t => t.AddedByID)
-                .Index(t => t.ProjectManagerID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.ProjectActivityFile",
@@ -157,16 +174,6 @@ namespace ILSPMS.Data.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.Division",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 100),
-                        Deleted = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
                 "dbo.Error",
                 c => new
                     {
@@ -182,46 +189,50 @@ namespace ILSPMS.Data.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.User", "RoleID", "dbo.Role");
+            DropForeignKey("dbo.ApproverFlowByRole", "NextApproverRoleID", "dbo.Role");
+            DropForeignKey("dbo.ApproverFlowByRole", "ApproverRoleID", "dbo.Role");
+            DropForeignKey("dbo.ProjectMovement", "ApproverRoleID", "dbo.Role");
+            DropForeignKey("dbo.ProjectMovement", "ProjectMovementTypeID", "dbo.ProjectMovementType");
             DropForeignKey("dbo.Project", "ProjectManagerID", "dbo.User");
             DropForeignKey("dbo.ProjectMovement", "ProjectManagerID", "dbo.User");
             DropForeignKey("dbo.ProjectActivity", "UserID", "dbo.User");
-            DropForeignKey("dbo.User", "DivisionID", "dbo.Division");
             DropForeignKey("dbo.Project", "AddedByID", "dbo.User");
-            DropForeignKey("dbo.ProjectMovement", "ApproverID", "dbo.User");
-            DropForeignKey("dbo.ProjectMovement", "ProjectMovementTypeID", "dbo.ProjectMovementType");
-            DropForeignKey("dbo.ProjectMovement", "MilestoneID", "dbo.Milestone");
-            DropForeignKey("dbo.ProjectActivity", "MilestoneID", "dbo.Milestone");
-            DropForeignKey("dbo.ProjectActivityFile", "ProjectActivityID", "dbo.ProjectActivity");
             DropForeignKey("dbo.ProjectMovement", "ProjectID", "dbo.Project");
             DropForeignKey("dbo.ProjectActivity", "ProjectID", "dbo.Project");
-            DropForeignKey("dbo.Milestone", "ApproverRoleID", "dbo.Role");
-            DropForeignKey("dbo.ApproverFlowByRole", "NextApproverID", "dbo.Role");
-            DropForeignKey("dbo.ApproverFlowByRole", "ApproverID", "dbo.Role");
+            DropForeignKey("dbo.ProjectActivityFile", "ProjectActivityID", "dbo.ProjectActivity");
+            DropForeignKey("dbo.ProjectMovement", "MilestoneID", "dbo.Milestone");
+            DropForeignKey("dbo.ProjectActivity", "MilestoneID", "dbo.Milestone");
+            DropForeignKey("dbo.ApproverFlowByRole", "MilestoneID", "dbo.Milestone");
+            DropForeignKey("dbo.User", "DivisionID", "dbo.Division");
+            DropForeignKey("dbo.Project", "DivisionID", "dbo.Division");
+            DropForeignKey("dbo.ProjectMovement", "ApproverUserID", "dbo.User");
             DropIndex("dbo.ProjectActivityFile", new[] { "ProjectActivityID" });
-            DropIndex("dbo.Project", new[] { "ProjectManagerID" });
-            DropIndex("dbo.Project", new[] { "AddedByID" });
             DropIndex("dbo.ProjectActivity", new[] { "UserID" });
             DropIndex("dbo.ProjectActivity", new[] { "MilestoneID" });
             DropIndex("dbo.ProjectActivity", new[] { "ProjectID" });
-            DropIndex("dbo.Milestone", new[] { "ApproverRoleID" });
-            DropIndex("dbo.ProjectMovement", new[] { "ApproverID" });
+            DropIndex("dbo.Project", new[] { "ProjectManagerID" });
+            DropIndex("dbo.Project", new[] { "DivisionID" });
+            DropIndex("dbo.Project", new[] { "AddedByID" });
+            DropIndex("dbo.User", new[] { "RoleID" });
+            DropIndex("dbo.User", new[] { "DivisionID" });
+            DropIndex("dbo.ProjectMovement", new[] { "ApproverUserID" });
+            DropIndex("dbo.ProjectMovement", new[] { "ApproverRoleID" });
             DropIndex("dbo.ProjectMovement", new[] { "ProjectMovementTypeID" });
             DropIndex("dbo.ProjectMovement", new[] { "MilestoneID" });
             DropIndex("dbo.ProjectMovement", new[] { "ProjectManagerID" });
             DropIndex("dbo.ProjectMovement", new[] { "ProjectID" });
-            DropIndex("dbo.User", new[] { "RoleID" });
-            DropIndex("dbo.User", new[] { "DivisionID" });
-            DropIndex("dbo.ApproverFlowByRole", new[] { "NextApproverID" });
-            DropIndex("dbo.ApproverFlowByRole", new[] { "ApproverID" });
+            DropIndex("dbo.ApproverFlowByRole", new[] { "NextApproverRoleID" });
+            DropIndex("dbo.ApproverFlowByRole", new[] { "ApproverRoleID" });
+            DropIndex("dbo.ApproverFlowByRole", new[] { "MilestoneID" });
             DropTable("dbo.Error");
-            DropTable("dbo.Division");
             DropTable("dbo.ProjectMovementType");
             DropTable("dbo.ProjectActivityFile");
-            DropTable("dbo.Project");
-            DropTable("dbo.ProjectActivity");
             DropTable("dbo.Milestone");
-            DropTable("dbo.ProjectMovement");
+            DropTable("dbo.ProjectActivity");
+            DropTable("dbo.Division");
+            DropTable("dbo.Project");
             DropTable("dbo.User");
+            DropTable("dbo.ProjectMovement");
             DropTable("dbo.Role");
             DropTable("dbo.ApproverFlowByRole");
         }

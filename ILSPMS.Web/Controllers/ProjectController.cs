@@ -30,8 +30,8 @@ namespace ILSPMS.Web.Controllers
             _divisionRepository = divisionRepository;
         }
 
-        [Route("{filter?}/{all?}")]
-        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, bool all = false)
+        [Route("{filter?}/{all?}/{divisionID?}")]
+        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, bool all = false, int? divisionID = 0)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -39,19 +39,22 @@ namespace ILSPMS.Web.Controllers
                 List<Project> projects = null;
 
                 var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
+                filter = filter != null ? filter.Trim().ToLower() : null;
 
                 if (currentUser.RoleID == (int)Enumerations.Role.PM)
                 {
-                    projects = _projectRepository
-                        .FindBy(s => !s.Deleted && s.ProjectManagerID == currentUser.ID
+                projects = _projectRepository
+                    .FindBy(s => !s.Deleted && s.ProjectManagerID == currentUser.ID
+                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
                             && (!all || s.DateCreated.Year == DateTime.Now.Year))
                         .OrderBy(m => m.Name)
                         .ToList();
                 }
-                else if (currentUser.RoleID == (int)Enumerations.Role.DivisionOfficer)
+                else if (currentUser.RoleID == (int)Enumerations.Role.DivisionChief)
                 {
                     projects = _projectRepository
                         .FindBy(s => !s.Deleted && s.DivisionID == currentUser.DivisionID
+                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
                             && (!all || s.DateCreated.Year == DateTime.Now.Year))
                         .OrderBy(m => m.Name)
                         .ToList();
@@ -60,6 +63,8 @@ namespace ILSPMS.Web.Controllers
                 {
                     projects = _projectRepository
                         .FindBy(s => !s.Deleted
+                            && (divisionID == 0 || s.DivisionID == divisionID)
+                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
                             && (!all || s.DateCreated.Year == DateTime.Now.Year))
                         .OrderBy(m => m.Name)
                         .ToList();
@@ -110,6 +115,7 @@ namespace ILSPMS.Web.Controllers
                             ProjectManagerID = model.ProjectManagerID,
                             Deleted = false
                         };
+                        project.Initialize();
                         _projectRepository.Add(project);
                         _unitOfWork.Commit();
                         model.ID = project.ID;

@@ -271,8 +271,20 @@ th[st-sort]:hover {
     content: '\25BC';
 }
 
+.boxes-container {
+    position: fixed;
+    overflow-y: auto;
+    top: 100px;
+    bottom: 25px;
+    right: 20px;
+    left: 80px;
+}
 
-
+.card-item {
+    background-color:#EEE;
+    padding:15px 7px;
+    border:#DDD solid 1px;
+}
 
 /*APP*/
 

@@ -9,10 +9,13 @@ namespace ILSPMS.Entities
     public class ApproverFlowByRole : IEntityBase
     {
         public int ID { get; set; }
-        public int ApproverID { get; set; }
-        public int? NextApproverID { get; set; }
+        public int MilestoneID { get; set; }
+        public int ApproverRoleID { get; set; }
+        public int? NextApproverRoleID { get; set; }
+        public bool IsInitial { get; set; }
 
-        public virtual Role Approver { get; set; }
-        public virtual Role NextApprover { get; set; }
+        public virtual Milestone Milestone { get; set; }
+        public virtual Role ApproverRole { get; set; }
+        public virtual Role NextApproverRole { get; set; }
     }
 }

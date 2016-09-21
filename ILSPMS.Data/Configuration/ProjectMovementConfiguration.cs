@@ -29,7 +29,10 @@ namespace ILSPMS.Data
             Property(s => s.IsApproved)
                 .IsRequired();
 
-            Property(s => s.ApproverID)
+            Property(s => s.ApproverRoleID)
+                .IsOptional();
+
+            Property(s => s.ApproverUserID)
                 .IsOptional();
 
             Property(s => s.DateSubmitted)

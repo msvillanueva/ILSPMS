@@ -8,6 +8,15 @@ namespace ILSPMS.Entities
 {
     public class User : IEntityBase
     {
+        public User()
+        {
+            Projects = new List<Project>();
+            CreatedProjects = new List<Project>();
+            ProjectActivities = new List<ProjectActivity>();
+            ProjectMovements = new List<ProjectMovement>();
+            ApprovedProjectMovements = new List<ProjectMovement>();
+        }
+
         public int ID { get; set; }
         public int? DivisionID { get; set; }
         public string LastName { get; set; }

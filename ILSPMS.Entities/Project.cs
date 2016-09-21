@@ -8,6 +8,12 @@ namespace ILSPMS.Entities
 {
     public class Project : IEntityBase
     {
+        public Project()
+        {
+            ProjectActivities = new List<ProjectActivity>();
+            ProjectMovements = new List<ProjectMovement>();
+        }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public int AddedByID { get; set; }

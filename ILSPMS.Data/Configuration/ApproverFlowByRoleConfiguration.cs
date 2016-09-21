@@ -11,11 +11,17 @@ namespace ILSPMS.Data
     {
         public ApproverFlowByRoleConfiguration()
         {
-            Property(s => s.ApproverID)
+            Property(s => s.MilestoneID)
                 .IsRequired();
 
-            Property(s => s.NextApproverID)
+            Property(s => s.ApproverRoleID)
+                .IsRequired();
+
+            Property(s => s.NextApproverRoleID)
                 .IsOptional();
+
+            Property(s => s.IsInitial)
+                .IsRequired();
         }
     }
 }
