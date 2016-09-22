@@ -19,19 +19,21 @@ namespace ILSPMS.Web.Controllers
         private readonly IEntityBaseRepository<Project> _projectRepository;
         private readonly IEntityBaseRepository<User> _userRepository;
         private readonly IEntityBaseRepository<Division> _divisionRepository;
+        private readonly IEntityBaseRepository<Milestone> _milestoneRepository;
 
         public ProjectController(IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork,
             IEntityBaseRepository<Project> projectRepository, IEntityBaseRepository<User> userRepository,
-            IEntityBaseRepository<Division> divisionRepository
+            IEntityBaseRepository<Division> divisionRepository, IEntityBaseRepository<Milestone> milestoneRepository
             ) : base (_errorsRepository, _unitOfWork)
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
             _divisionRepository = divisionRepository;
+            _milestoneRepository = milestoneRepository;
         }
 
-        [Route("{filter?}/{all?}/{divisionID?}")]
-        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, bool all = false, int? divisionID = 0)
+        [Route("{filter?}/{all?}/{divisionID?}/{forApproval?}")]
+        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, bool all = false, int? divisionID = 0, bool forApproval = false)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -41,37 +43,46 @@ namespace ILSPMS.Web.Controllers
                 var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
                 filter = filter != null ? filter.Trim().ToLower() : null;
 
-                if (currentUser.RoleID == (int)Enumerations.Role.PM)
+                if (forApproval)
                 {
-                projects = _projectRepository
-                    .FindBy(s => !s.Deleted && s.ProjectManagerID == currentUser.ID
-                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                            && (!all || s.DateCreated.Year == DateTime.Now.Year))
-                        .OrderBy(m => m.Name)
-                        .ToList();
-                }
-                else if (currentUser.RoleID == (int)Enumerations.Role.DivisionChief)
-                {
-                    projects = _projectRepository
-                        .FindBy(s => !s.Deleted && s.DivisionID == currentUser.DivisionID
-                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                            && (!all || s.DateCreated.Year == DateTime.Now.Year))
-                        .OrderBy(m => m.Name)
-                        .ToList();
+
                 }
                 else
                 {
-                    projects = _projectRepository
-                        .FindBy(s => !s.Deleted
-                            && (divisionID == 0 || s.DivisionID == divisionID)
-                            && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                            && (!all || s.DateCreated.Year == DateTime.Now.Year))
-                        .OrderBy(m => m.Name)
-                        .ToList();
+                    if (currentUser.RoleID == (int)Enumerations.Role.PM)
+                    {
+                        projects = _projectRepository
+                            .FindBy(s => !s.Deleted && s.ProjectManagerID == currentUser.ID
+                                    && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
+                                    && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                                .OrderBy(m => m.Name)
+                                .ToList();
+                    }
+                    else if (currentUser.RoleID == (int)Enumerations.Role.DivisionChief)
+                    {
+                        projects = _projectRepository
+                            .FindBy(s => !s.Deleted && s.DivisionID == currentUser.DivisionID
+                                && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
+                                && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                            .OrderBy(m => m.Name)
+                            .ToList();
+                    }
+                    else
+                    {
+                        projects = _projectRepository
+                            .FindBy(s => !s.Deleted
+                                && (divisionID == 0 || s.DivisionID == divisionID)
+                                && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
+                                && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                            .OrderBy(m => m.Name)
+                            .ToList();
+                    }
                 }
 
+                var topOrder = _milestoneRepository.GetAll().Max(s => s.Order);
+
                 var list = Mapper.Map<List<Project>, List<ProjectViewModel>>(projects);
-                response = request.CreateResponse(HttpStatusCode.OK, new { items = list });
+                response = request.CreateResponse(HttpStatusCode.OK, new { items = list, ms = topOrder });
 
                 return response;
             });

@@ -9,11 +9,13 @@
         $scope.loadingData = true;
         $scope.projects = [];
         $scope.tableRowCollection = [];
+        $scope.topMilestone = 0;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.popMenu = popMenu;
         $scope.hideMenu = hideMenu;
+        $scope.submit = submit;
 
         function clearSearch() {
             $scope.filter = '';
@@ -26,8 +28,7 @@
             var config = {
                 params: {
                     filter: $scope.filter,
-                    all: $scope.all,
-                    divisionID: null
+                    all: $scope.all
                 }
             };
 
@@ -41,8 +42,26 @@
             if ($scope.filter && $scope.filter.length) {
                 notificationService.displayInfo(result.data.items.length + (result.data.items.length > 1 ? ' records found' : ' record found'));
             }
-
+            $scope.topMilestone = result.data.ms;
             $scope.projects = result.data.items;
+        }
+
+        function submit(row) {
+            cambria.cConfirm('Are you sure you want to commit project<br/><b>' + row.Name + '</b>?', 'CONFIRM ACTION', function (click) {
+                if (click) {
+                    //apiService.post(
+                    //    '/api/users/remove/',
+                    //    row,
+                    //    function (response) {
+                    //        if (response.data.success)
+                    //            notificationService.displaySuccess(row.FullName + ' was removed from the list.');
+                    //        else
+                    //            notificationService.displayError(response.data.message);
+                    //    },
+                    //    notificationService.responseFailed
+                    //);
+                }
+            });
         }
 
         function popMenu($event, row) {

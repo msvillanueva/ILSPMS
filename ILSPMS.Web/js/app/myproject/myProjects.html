@@ -1,11 +1,8 @@
 ﻿<div class="clearfix">
     <div class="view-header">
         <search-bar></search-bar>
-        <div class="input-group pull-right">
-            <input class="form-control w20" type="checkbox" value="all" id="chkAll" ng-model="all" ng-click="search()" /><label for="chkAll" class="form-control">Show previous projects</label>
-        </div>
     </div>
-    <div class="mt20 boxes-container">
+    <div class="boxes-container">
         <div class="col-lg-12 mt20" ng-if="!loadingData && projects.length == 0">
             <i class="fa fa-file-o"></i>
             <span>No record to display</span>
@@ -14,24 +11,64 @@
             <i>&nbsp;Fetching data..</i>
             <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
         </div>
-        <div class="col-sm-4 mt20" ng-repeat="row in projects">
+        <div class="col-md-4 mt20" ng-repeat="row in projects">
             <div class="card-item" ng-mouseenter="popMenu($event, row)" ng-mouseleave="hideMenu($event, row)">
-                <div class="row">
-                    <div class="staff-icon pull-left ps10">
-                        <i class="icon-user3 "></i>
+                <div class="card-title ps10">
+                    {{row.Name}}
+                </div>
+                <div class="card-content mt10">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-building-o"></i></div>
+                            {{row.DivisionName}}
+                        </div>
                     </div>
-                    <div class="pull-left mt10">
-                        <p class="staff-name">{{ row.Name }}</p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-calendar"></i></div>
+                            {{row.Year}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-user"></i></div>
+                            {{row.ProjectManager}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-money"></i></div>
+                            {{row.Budget  | currency:'P ':2}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-flag"></i></div>
+                            {{row.Milestone}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-icon-wrapper"><i class="fa fa-line-chart"></i></div>
+                            {{row.Activity}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="card-progress-label">MILESTONE PROGRESS</span>
+                            <md-progress-linear class="card-progress milestone" md-mode="determinate" value="{{(row.MilestoneOrder / topMilestone) * 100}}"></md-progress-linear>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="card-progress-label">BUDGET UTILIZATION</span>
+                            <md-progress-linear class="card-progress budget" md-mode="determinate" value="{{(row.BudgetUtilized / row.Budget) * 100}}"></md-progress-linear>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <span class="ps10"></span>
-                    </div>
-                </div>
-
-                <div class="item-card-menu ngFade" ng-if="row.Hovered">
-                    <a class="btn btn-lg btn-default" ng-click="view(row)"><i class="icon-edit3"></i></a>
+                <div class="card-menu ngFade" ng-if="row.Hovered && !row.LockSubmit">
+                    <a class="btn btn-default mt10" ng-click="submit(row)"><i class="fa fa-paper-plane"></i></a>
+                    <a class="btn btn-default mt10" ng-click="view(row)"><i class="fa fa-line-chart"></i></a>
                 </div>
             </div>
         </div>

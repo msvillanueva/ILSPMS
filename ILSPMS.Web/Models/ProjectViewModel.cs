@@ -20,5 +20,11 @@ namespace ILSPMS.Web.Models
         public string AddedByName { get; set; }
         public string ProjectManager { get; set; }
         public string Year { get; set; }
+        public string Milestone { get; set; }
+        public string Activity { get; set; }
+        public bool LockSubmit { get; set; }
+
+        public double BudgetUtilized { get; set; }
+        public int MilestoneOrder { get; set; }
     }
 }
