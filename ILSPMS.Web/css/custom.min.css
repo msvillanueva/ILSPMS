@@ -221,6 +221,25 @@
         border-color: transparent #222d32 transparent transparent;
     }
 
+.tooltip-left {
+    top: 0%;
+    right: 100%;
+    margin-right:5px;
+    padding: 9px 0px !important;
+    width:100px !important;
+}
+
+    .tooltip-left::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent #222d32;
+    }
+
 /*PAGE*/
 .page {
     position:fixed;
@@ -315,6 +334,7 @@ th[st-sort]:hover {
 }
 .card-menu a {
     font-size:18px !important;
+    width:50px;
 }
 
 .card-progress .md-container .md-bar,
@@ -342,6 +362,62 @@ md-progress-linear.card-progress {
     margin-left:10px;
 }
 
+.milestone-card {
+    height:100px;
+    float:left;
+    margin-right:30px;
+    background-color:#b9f6ca;
+    position: relative;
+    width:200px;
+}
+    .milestone-card::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -100px;
+        margin-top: -50px;
+        border-width: 50px;
+        border-style: solid;
+        border-color: transparent transparent transparent #b9f6ca;
+        z-index:2;
+    }
+    .milestone-card::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        margin-top: -50px;
+        border-width: 50px;
+        border-style: solid;
+        border-color: transparent transparent transparent #fefefe;
+        z-index:1;
+    }
+
+.milestone-title {
+    margin:0 0 0 70px;
+    position:absolute;
+    font-weight:bold;
+}
+
+.fixed-center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fixed-center-horizontal {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.milestone-wrapper {
+    height:100%;
+}
+
+.fixed-center-vertical {
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 /*ANGULAR ANIMATION*/
 

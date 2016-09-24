@@ -57,7 +57,8 @@
       "js/app/division/**/*.js",
       "js/app/project/**/*.js",
       "js/app/myproject/**/*.js",
-      "js/app/profile/**/*.js"
+      "js/app/profile/**/*.js",
+      "js/app/movement/**/*.js"
     ]
   }
 ]

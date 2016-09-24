@@ -13,9 +13,9 @@ namespace ILSPMS.Services
     public class ProjectService : IProjectService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly EntityBaseRepository<Milestone> _milestoneRepository;
+        private readonly IEntityBaseRepository<Milestone> _milestoneRepository;
 
-        public ProjectService(IUnitOfWork unitOfWork, EntityBaseRepository<Milestone> milestoneRepository)
+        public ProjectService(IUnitOfWork unitOfWork, IEntityBaseRepository<Milestone> milestoneRepository)
         {
             _unitOfWork = unitOfWork;
             _milestoneRepository = milestoneRepository;

@@ -1,0 +1,24 @@
+﻿<div class="clearfix">
+    <div class="view-header">
+        <a ng-href="#/my-projects" class="btn btn-primary"><i class="fa fa-backward"></i> RETURN TO MY PROJECT</a>
+    </div>
+    <div class="boxes-container">
+        <div class="col-lg-12 mt20" ng-if="!loadingData && milestones.length == 0">
+            <i class="fa fa-file-o"></i>
+            <span>No record to display</span>
+        </div>
+        <div class="col-lg-12 mt20" ng-if="loadingData">
+            <i>&nbsp;Fetching data..</i>
+            <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
+        </div>
+        <div class="mt20">
+            <div class="milestone-card mt10" ng-repeat="row in milestones">
+                <div class="milestone-wrapper">
+                    <div class="milestone-title fixed-center-vertical clearfix">
+                        {{row.MilestoneName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

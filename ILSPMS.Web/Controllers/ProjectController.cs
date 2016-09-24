@@ -2,6 +2,7 @@
 using ILSPMS.Common;
 using ILSPMS.Data;
 using ILSPMS.Entities;
+using ILSPMS.Services;
 using ILSPMS.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -21,15 +22,19 @@ namespace ILSPMS.Web.Controllers
         private readonly IEntityBaseRepository<Division> _divisionRepository;
         private readonly IEntityBaseRepository<Milestone> _milestoneRepository;
 
+        private readonly IProjectService _projectService;
+
         public ProjectController(IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork,
             IEntityBaseRepository<Project> projectRepository, IEntityBaseRepository<User> userRepository,
-            IEntityBaseRepository<Division> divisionRepository, IEntityBaseRepository<Milestone> milestoneRepository
+            IEntityBaseRepository<Division> divisionRepository, IEntityBaseRepository<Milestone> milestoneRepository,
+            IProjectService projectService
             ) : base (_errorsRepository, _unitOfWork)
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
             _divisionRepository = divisionRepository;
             _milestoneRepository = milestoneRepository;
+            _projectService = projectService;
         }
 
         [Route("{filter?}/{all?}/{divisionID?}/{forApproval?}")]
@@ -43,9 +48,17 @@ namespace ILSPMS.Web.Controllers
                 var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
                 filter = filter != null ? filter.Trim().ToLower() : null;
 
-                if (forApproval)
+                if (forApproval && currentUser.RoleID != (int)Enumerations.Role.PM)
                 {
-
+                    projects = _projectRepository
+                    .FindBy(s => !s.Deleted && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault() != null
+                        && !s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().IsApproved
+                        && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID == currentUser.RoleID
+                        //&& (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
+                        //&& (!all || s.DateCreated.Year == DateTime.Now.Year)
+                        )
+                    .OrderBy(m => m.Name)
+                    .ToList();
                 }
                 else
                 {
@@ -197,5 +210,36 @@ namespace ILSPMS.Web.Controllers
                 return response;
             });
         }
+
+        [Authorize(Roles = "Project Manager")]
+        [Route("submit")]
+        [HttpPost]
+        public HttpResponseMessage SubmitProject(HttpRequestMessage request, ProjectViewModel model)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (ModelState.IsValid)
+                {
+                    var project = _projectRepository.GetSingle(model.ID);
+                    if (project != null)
+                    {
+                        _projectService.Submit(project);
+                    }
+                    _unitOfWork.Commit();
+
+                    var obj = _projectRepository.GetSingle(model.ID);
+                    var item = Mapper.Map<ProjectViewModel>(project);
+
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = item });
+                }
+                else
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = false });
+
+                return response;
+            });
+        }
+
     }
 }

@@ -28,7 +28,8 @@
             var config = {
                 params: {
                     filter: $scope.filter,
-                    all: $scope.all
+                    all: $scope.all,
+                    forApproval: true
                 }
             };
 
@@ -49,17 +50,17 @@
         function submit(row) {
             cambria.cConfirm('Are you sure you want to commit project<br/><b>' + row.Name + '</b>?', 'CONFIRM ACTION', function (click) {
                 if (click) {
-                    //apiService.post(
-                    //    '/api/users/remove/',
-                    //    row,
-                    //    function (response) {
-                    //        if (response.data.success)
-                    //            notificationService.displaySuccess(row.FullName + ' was removed from the list.');
-                    //        else
-                    //            notificationService.displayError(response.data.message);
-                    //    },
-                    //    notificationService.responseFailed
-                    //);
+                    apiService.post(
+                        '/api/projects/submit/',
+                        row,
+                        function (response) {
+                            if (response.data.success)
+                                $scope.search();
+                            else
+                                notificationService.displayError(response.data.message);
+                        },
+                        notificationService.responseFailed
+                    );
                 }
             });
         }

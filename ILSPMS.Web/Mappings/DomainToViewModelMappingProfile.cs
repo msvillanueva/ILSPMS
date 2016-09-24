@@ -26,8 +26,12 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.Activity, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ProjectMovementType.Name : ""))
                 .ForMember(d => d.BudgetUtilized, v => v.MapFrom(s => s.ProjectActivities.Count() > 0 ? s.ProjectActivities.Sum(pa => pa.BudgetUtilized) : 0))
                 .ForMember(d => d.MilestoneOrder, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().Milestone.Order : 0))
+                .ForMember(d => d.ApproverRoleID, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID : 0))
+                .ForMember(d => d.ApproverRoleName, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? (s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID != null ? s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRole.Name : "" ) : ""))
                 .ForMember(d => d.Year, v => v.MapFrom(s => s.DateCreated.Year.ToString()))
                 .ForMember(d => d.LockSubmit, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ProjectMovementTypeID != (int)Enumerations.ProjectMovementType.Init : false));
+            CreateMap<ProjectMovement, ProjectMovementViewModel>()
+                .ForMember(d => d.ProjectMovementTypeName, v => v.MapFrom(s => s.ProjectMovementType.Name));
         }
     }
 }

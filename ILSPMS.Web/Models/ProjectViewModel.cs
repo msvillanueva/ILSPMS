@@ -26,5 +26,7 @@ namespace ILSPMS.Web.Models
 
         public double BudgetUtilized { get; set; }
         public int MilestoneOrder { get; set; }
+        public int ApproverRoleID { get; set; }
+        public string ApproverRoleName { get; set; }
     }
 }

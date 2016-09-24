@@ -56,6 +56,10 @@ namespace ILSPMS.Web.App_Start
                 .As<IMembershipService>()
                 .InstancePerRequest();
 
+            builder.RegisterType<ProjectService>()
+                .As<IProjectService>()
+                .InstancePerRequest();
+
             Container = builder.Build();
 
             return Container;

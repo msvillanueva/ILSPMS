@@ -54,6 +54,13 @@
                 menu: '#menuMyProjects',
                 resolve: isLoggedNotAdmin
             })
+            .when("/project-movements/:id", {
+                title: 'My Projects',
+                templateUrl: "js/app/movement/movements.html",
+                controller: "movementsCtrl",
+                menu: '#menuMyProjects',
+                resolve: isLoggedNotAdmin
+            })
             .otherwise({ redirectTo: "/" });
 
     }
