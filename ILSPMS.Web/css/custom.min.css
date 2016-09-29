@@ -363,9 +363,9 @@ md-progress-linear.card-progress {
 }
 
 .milestone-card {
-    height:100px;
+    height:80px;
     float:left;
-    margin-right:30px;
+    margin-right:15px;
     background-color:#b9f6ca;
     position: relative;
     width:200px;
@@ -374,9 +374,9 @@ md-progress-linear.card-progress {
         content: "";
         position: absolute;
         top: 50%;
-        right: -100px;
-        margin-top: -50px;
-        border-width: 50px;
+        right: -80px;
+        margin-top: -40px;
+        border-width: 40px;
         border-style: solid;
         border-color: transparent transparent transparent #b9f6ca;
         z-index:2;
@@ -386,17 +386,27 @@ md-progress-linear.card-progress {
         position: absolute;
         top: 50%;
         left: 0px;
-        margin-top: -50px;
-        border-width: 50px;
+        margin-top: -40px;
+        border-width: 40px;
         border-style: solid;
         border-color: transparent transparent transparent #fefefe;
         z-index:1;
     }
 
+.milestone-card.selected {
+    background-color:#8FF0AA !important;
+}
+
+.milestone-card.selected::after {
+    border-color:transparent transparent transparent #8FF0AA !important;
+}
+
 .milestone-title {
     margin:0 0 0 70px;
     position:absolute;
     font-weight:bold;
+    z-index:3;
+    color:#333;
 }
 
 .fixed-center {

@@ -1,22 +1,21 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('movementsCtrl', movementsCtrl);
+    app.controller('activitiesCtrl', activitiesCtrl);
 
-    movementsCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$routeParams'];
+    activitiesCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$routeParams'];
 
-    function movementsCtrl($scope, apiService, notificationService, $routeParams) {
-        $scope.pageClass = 'page-users';
+    function activitiesCtrl($scope, apiService, notificationService, $routeParams) {
         $scope.dataLoading = true;
         $scope.page = 0;
         $scope.pagesCount = 0;
-
         $scope.milestones = [];
-
-        $scope.movements = [];
+        $scope.activities = [];
         $scope.tableRowCollection = [];
+        $scope.lastMilestoneID = 0;
+        $scope.canAdd = false;
 
-        $scope.showMovements = showMovements;
+        $scope.showActivities = showActivities;
 
         function init() {
             var config = {
@@ -25,7 +24,7 @@
                 }
             };
 
-            apiService.get('/api/movements',
+            apiService.get('/api/activities',
                 config,
                 loadCompleted,
                 notificationService.responseFailed
@@ -36,23 +35,26 @@
             if (response.data.success) {
                 $scope.dataLoading = false;
                 $scope.milestones = response.data.items;
-                $scope.showMovements($scope.milestones[response.data.items.length - 1]);
-                $scope.setTitle(response.data.title + ' | Movements');
+                $scope.showActivities($scope.milestones[response.data.items.length - 1]);
+                $scope.lastMilestoneID = $scope.milestones[response.data.items.length - 1].MilestoneID;
+                $scope.setTitle(response.data.title + ' | Activities');
+                $scope.canAdd = true;
             }
             else {
                 notificationService.displayError(response.data.message);
             }
         }
 
-        function showMovements(row) {
+        function showActivities(row) {
             $scope.tableRowCollection = row.Movements;
-            $scope.movements = [].concat($scope.tableRowCollection);
+            $scope.projects = [].concat($scope.tableRowCollection);
 
             var cards = angular.element(document.querySelectorAll('.milestone-card'));
             cards.removeClass('selected');
 
             var card = angular.element(document.querySelector('#card' + row.MilestoneID));
             card.addClass('selected');
+            $scope.canAdd = $scope.lastMilestoneID == row.MilestoneID;
         }
 
         init();

@@ -54,6 +54,8 @@ namespace ILSPMS.Web.Controllers
                     .FindBy(s => !s.Deleted && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault() != null
                         && !s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().IsApproved
                         && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID == currentUser.RoleID
+                        && (s.DivisionID == currentUser.DivisionID || currentUser.RoleID == (int)Enumerations.Role.DeputyExecDir
+                            || currentUser.RoleID == (int)Enumerations.Role.ExecDir)
                         //&& (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
                         //&& (!all || s.DateCreated.Year == DateTime.Now.Year)
                         )
@@ -145,7 +147,7 @@ namespace ILSPMS.Web.Controllers
                         model.ID = project.ID;
                     }
                     var obj = _projectRepository.GetSingle(model.ID);
-                    var item = Mapper.Map<ProjectViewModel>(obj);
+                    var item = Mapper.Map<NewProjectMovementViewModel>(obj);
                     var pm = _userRepository.GetSingle(obj.ProjectManagerID.HasValue ? (int)obj.ProjectManagerID : 0);
                     item.ProjectManager = pm != null ? $"{pm.FirstName} {pm.LastName}" : "";
                     item.DivisionName = _divisionRepository.GetSingle(item.DivisionID).Name;
@@ -228,6 +230,38 @@ namespace ILSPMS.Web.Controllers
                         _projectService.Submit(project);
                     }
                     _unitOfWork.Commit();
+
+                    var obj = _projectRepository.GetSingle(model.ID);
+                    var item = Mapper.Map<ProjectViewModel>(project);
+
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = item });
+                }
+                else
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = false });
+
+                return response;
+            });
+        }
+
+        [Authorize(Roles = "Division Chief, Deputy Executive Director, Executive Director, APD")]
+        [Route("approve")]
+        [HttpPost]
+        public HttpResponseMessage ApproveProject(HttpRequestMessage request, ProjectViewModel model)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (ModelState.IsValid)
+                {
+                    var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
+                    var project = _projectRepository.GetSingle(model.ID);
+                    if (project != null)
+                    {
+                        project.Approve(currentUser);
+                        _unitOfWork.Commit();
+                        _projectService.Submit(project);
+                    }
 
                     var obj = _projectRepository.GetSingle(model.ID);
                     var item = Mapper.Map<ProjectViewModel>(project);

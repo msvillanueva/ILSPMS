@@ -48,7 +48,7 @@ namespace ILSPMS.Web.Controllers
                     projectMovements.Add(milestoneMovement);
                 }
 
-                response = request.CreateResponse(HttpStatusCode.OK, new { success = true, items = projectMovements });
+                response = request.CreateResponse(HttpStatusCode.OK, new { success = true, items = projectMovements, title = project.Name });
 
                 return response;
             });

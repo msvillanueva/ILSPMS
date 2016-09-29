@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-icon-wrapper"><i class="fa fa-line-chart"></i></div>
-                            {{row.Activity}} <span ng-if="row.Activity == 'For Approval'">- {{row.ApproverRoleName}}</span>
+                            {{row.Activity}} <span ng-if="row.Activity == 'For Approval' || row.Activity == 'Next Approval'">- {{row.ApproverRoleName}}</span>
                         </div>
                     </div>
                     <div class="row">
@@ -83,7 +83,7 @@
                         <i class="fa fa-line-chart"></i>
                         <span class="tooltiptext tooltip-left">Movements</span>
                     </a>
-                    <a class="btn btn-default mt10 tooltip-nav" ng-click="activities(row)">
+                    <a class="btn btn-default mt10 tooltip-nav" ng-href="#/project-activities/{{row.ID}}">
                         <i class="fa fa-file-text-o"></i>
                         <span class="tooltiptext tooltip-left">Activities</span>
                     </a>

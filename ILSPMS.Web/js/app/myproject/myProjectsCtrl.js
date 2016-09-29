@@ -16,6 +16,7 @@
         $scope.popMenu = popMenu;
         $scope.hideMenu = hideMenu;
         $scope.submit = submit;
+        $scope.approve = approve;
 
         function clearSearch() {
             $scope.filter = '';
@@ -52,6 +53,24 @@
                 if (click) {
                     apiService.post(
                         '/api/projects/submit/',
+                        row,
+                        function (response) {
+                            if (response.data.success)
+                                $scope.search();
+                            else
+                                notificationService.displayError(response.data.message);
+                        },
+                        notificationService.responseFailed
+                    );
+                }
+            });
+        }
+
+        function approve(row) {
+            cambria.cConfirm('Are you sure you want to approve project<br/><b>' + row.Name + '</b>?', 'CONFIRM ACTION', function (click) {
+                if (click) {
+                    apiService.post(
+                        '/api/projects/approve/',
                         row,
                         function (response) {
                             if (response.data.success)

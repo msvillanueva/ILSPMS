@@ -26,5 +26,21 @@ namespace ILSPMS.Web
                 project.ProjectMovements.Add(movement);
             }
         }
+
+        public static void Approve(this Project project, User user)
+        {
+            var latestMovement = project.ProjectMovements.OrderByDescending(s => s.DateCreated).FirstOrDefault();
+            if (latestMovement != null && latestMovement.ApproverRoleID != null && !latestMovement.IsApproved)
+            {
+                var copiedLatestMovement = latestMovement;
+                copiedLatestMovement.ApproverUser = user;
+                copiedLatestMovement.ApproverUserID = user.ID;
+                copiedLatestMovement.IsApproved = true;
+                copiedLatestMovement.DateApproved = DateTime.Now;
+                copiedLatestMovement.DateCreated = DateTime.Now;
+
+                project.ProjectMovements.Add(copiedLatestMovement);
+            }
+        }
     }
 }

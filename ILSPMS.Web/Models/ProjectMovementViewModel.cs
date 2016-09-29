@@ -21,5 +21,7 @@ namespace ILSPMS.Web.Models
         public DateTime DateCreated { get; set; }
 
         public string ProjectMovementTypeName { get; set; }
+        public string ProjectManagerName { get; set; }
+        public string ApproverName { get; set; }
     }
 }

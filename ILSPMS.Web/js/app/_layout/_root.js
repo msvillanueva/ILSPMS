@@ -20,6 +20,7 @@
         $scope.logout = logout;
         $scope.formatDate = formatDate;
         $scope.filterValue = filterValue;
+        $scope.setTitle = setTitle;
 
         function displayUserInfo() {
             $scope.userData.isUserLoggedIn = membershipService.isUserLoggedIn();
@@ -51,6 +52,12 @@
                 $event.preventDefault();
             }
         };
+
+        function setTitle(title) {
+            var subLogo = document.getElementsByClassName('sub-logo')[0];
+            if (subLogo)
+                document.getElementsByClassName('sub-logo')[0].innerHTML = ' | ' + title;
+        }
 
         $scope.displayUserInfo();
     }

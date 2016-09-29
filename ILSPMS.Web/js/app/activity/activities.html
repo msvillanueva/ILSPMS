@@ -1,5 +1,7 @@
-﻿<div class="clearfix">
+﻿
+<div class="clearfix">
     <div class="view-header">
+        <add-button create="create()" ng-if="canAdd" label="Add Activity"></add-button>
         <a ng-href="#/my-projects" class="btn btn-primary"><i class="fa fa-backward"></i> RETURN TO MY PROJECTS</a>
     </div>
     <div class="boxes-container">
@@ -14,7 +16,7 @@
         <div class="mt20">
             <div class="milestone-card mt10 {{$last ? 'selected' : ''}}" ng-repeat="row in milestones" id="card{{row.MilestoneID}}">
                 <div class="milestone-wrapper">
-                    <a class="milestone-title fixed-center-vertical clearfix cursor-pointer" ng-click="showMovements(row)">
+                    <a class="milestone-title fixed-center-vertical clearfix cursor-pointer" ng-click="showActivities(row)">
                         {{row.MilestoneName}}
                     </a>
                 </div>
@@ -23,27 +25,36 @@
         <div class="clearfix">
         </div>
         <div class="mt20 col-lg-12">
-            <table class="table table-striped responsive-utilities jambo_table bulk_action" st-table="movements" st-safe-src="tableRowCollection">
+            <table class="table table-striped responsive-utilities jambo_table bulk_action" st-table="activities" st-safe-src="tableRowCollection">
                 <thead>
                     <tr class="headings">
                         <th>Date </th>
-                        <th>DivisionName </th>
-                        <th>Approver </th>
+                        <th>Activity </th>
+                        <th>Budget </th>
                         <th>Project Manager </th>
+                        <th class="no-link last">
+                            <span class="nobr">Action</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-if="!loadingData && movements.length == 0">
+                    <tr ng-if="!loadingData && activities.length == 0">
                         <td colspan="9">
                             <i class="fa fa-file-o"></i>
-                            <span>No movement to display</span>
+                            <span>No activity to display</span>
                         </td>
                     </tr>
-                    <tr ng-repeat="row in movements">
+                    <tr ng-repeat="row in activities">
                         <td>{{row.DateCreated | date:'dd MMM yyyy'}}</td>
-                        <td>{{row.ProjectMovementTypeName}}</td>
-                        <td>{{row.ApproverName}}</td>
+                        <td>{{row.Activity}}</td>
+                        <td>{{row.BudgetUtilized  | currency:'P ':2}}</td>
                         <td>{{row.ProjectManagerName }}</td>
+                    <td class="last">
+                        <a class="btn btn-default" ng-click="create(row)"><i class="fa fa-edit"></i> View</a>
+                        <a class="btn btn-default" ng-click="files(row)"><i class="fa fa-file-archive-o"></i> Files</a>
+                        <a class="btn btn-default" ng-click="upload(row)"><i class="fa fa-upload"></i> Upload</a>
+                        <a class="btn btn-danger" ng-click="archive($index, row)"><i class="fa fa-trash"></i> Archive</a>
+                    </td>
                     </tr>
                 </tbody>
                 <tfoot>

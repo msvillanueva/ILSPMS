@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="files\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacWebapiConfig.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
+    <Compile Include="Controllers\ProjectActivityController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ProjectMovementController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -172,7 +174,11 @@
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Models\DivisionViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\NewProjectMovementViewModel.cs" />
     <Compile Include="Models\PasswordViewModel.cs" />
+    <Compile Include="Models\ProjectActivityFileViewModel.cs" />
+    <Compile Include="Models\ProjectActivityViewModel.cs" />
+    <Compile Include="Models\ProjectMilestoneActivityViewModel.cs" />
     <Compile Include="Models\ProjectMilestoneMovementViewModel.cs" />
     <Compile Include="Models\ProjectMovementViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
@@ -196,6 +202,8 @@
     <Content Include="img\logo.png" />
     <Content Include="index.html" />
     <Content Include="js\app.min.js" />
+    <Content Include="js\app\activity\activities.html" />
+    <Content Include="js\app\activity\activitiesCtrl.js" />
     <Content Include="js\app\app.js" />
     <Content Include="js\app\dashboard\dashboard.html" />
     <Content Include="js\app\dashboard\dashboard.js" />

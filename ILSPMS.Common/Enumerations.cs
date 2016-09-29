@@ -20,7 +20,7 @@ namespace ILSPMS.Common
             [Description("Division Chief")]
             DivisionChief = 3,
 
-            [Description("Duputy Executive Director")]
+            [Description("Deputy Executive Director")]
             DeputyExecDir = 4,
 
             [Description("Executive Director")]

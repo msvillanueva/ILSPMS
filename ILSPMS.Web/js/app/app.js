@@ -61,6 +61,13 @@
                 menu: '#menuMyProjects',
                 resolve: isLoggedNotAdmin
             })
+            .when("/project-activities/:id", {
+                title: 'My Projects',
+                templateUrl: "js/app/activity/activities.html",
+                controller: "activitiesCtrl",
+                menu: '#menuMyProjects',
+                resolve: isLoggedNotAdmin
+            })
             .otherwise({ redirectTo: "/" });
 
     }
