@@ -1,0 +1,13 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Services.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Services.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Common.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Data.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\EntityFramework.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Common.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Data.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\ILSPMS.Entities.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\bin\Release\EntityFramework.xml
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\obj\Release\ILSPMS.Services.csprojResolveAssemblyReference.cache
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\obj\Release\ILSPMS.Services.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Services\obj\Release\ILSPMS.Services.pdb

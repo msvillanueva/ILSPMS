@@ -91,7 +91,7 @@ namespace ILSPMS.Web.Controllers
 
         [Route("remove")]
         [HttpPost]
-        public HttpResponseMessage Archive(HttpRequestMessage request, UserViewModel model)
+        public HttpResponseMessage Archive(HttpRequestMessage request, DivisionViewModel model)
         {
             return CreateHttpResponse(request, () =>
             {

@@ -166,3 +166,4 @@ D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\tr\FluentValidation.resources.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\zh-CN\FluentValidation.resources.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\obj\Debug\ILSPMS.Web.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\obj\Debug\ILSPMS.Web.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\img\logo.png

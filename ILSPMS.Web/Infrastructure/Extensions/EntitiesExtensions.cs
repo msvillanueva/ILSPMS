@@ -32,14 +32,27 @@ namespace ILSPMS.Web
             var latestMovement = project.ProjectMovements.OrderByDescending(s => s.DateCreated).FirstOrDefault();
             if (latestMovement != null && latestMovement.ApproverRoleID != null && !latestMovement.IsApproved)
             {
-                var copiedLatestMovement = latestMovement;
-                copiedLatestMovement.ApproverUser = user;
-                copiedLatestMovement.ApproverUserID = user.ID;
-                copiedLatestMovement.IsApproved = true;
-                copiedLatestMovement.DateApproved = DateTime.Now;
-                copiedLatestMovement.DateCreated = DateTime.Now;
+                var newMovement = new ProjectMovement()
+                {
+                    ApproverRoleID = latestMovement.ApproverRoleID,
+                    ApproverUserID = user.ID,
+                    DateApproved = DateTime.Now,
+                    DateSubmitted = latestMovement.DateSubmitted,
+                    ApproverRole = latestMovement.ApproverRole,
+                    ApproverUser = user,
+                    DateCreated = DateTime.Now,
+                    IsApproved = true,
+                    IsSubmitted = latestMovement.IsSubmitted,
+                    Milestone = latestMovement.Milestone,
+                    MilestoneID = latestMovement.MilestoneID,
+                    Project = latestMovement.Project,
+                    ProjectID = latestMovement.ProjectID,
+                    ProjectManager = latestMovement.ProjectManager,
+                    ProjectManagerID = latestMovement.ProjectManagerID,
+                    ProjectMovementTypeID = (int)Enumerations.ProjectMovementType.Approved
+                };
 
-                project.ProjectMovements.Add(copiedLatestMovement);
+                project.ProjectMovements.Add(newMovement);
             }
         }
     }

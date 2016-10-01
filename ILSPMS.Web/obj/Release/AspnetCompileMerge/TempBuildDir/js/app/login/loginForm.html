@@ -1,0 +1,23 @@
+﻿<div class="login_box">
+    <h3><span><i class="fa fa-key"></i>&nbsp;LOGIN</span> HERE</h3>
+    <form name="loginForm" ng-submit="login()">
+        <div class="form-group mt40">
+            <label for="username" class="control-label">Username or Email</label>
+            <input type="text" name="username" id="username" ng-model="user.username" class="form-control" required="" placeholder="Email/Username" />
+            <span ng-show="loginForm.username.$dirty && loginForm.username.$error.required" class="warning-message"><i class="icon-warning" aria-hidden="true"></i> Username is required</span>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required="" ng-model="user.password" placeholder="Password" />
+            <span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="warning-message"><i class="icon-warning" aria-hidden="true"></i> Password is required</span>
+        </div>
+        <div class="form-group mt40">
+            <div class="checkbox">
+                <a ng-href="#/forgotPassword" href="">Forget Password</a>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <button type="submit" ng-disabled="loginForm.$invalid || dataLoading" class="btn-primary btn-lg btn">SIGN IN</button>
+        </div>
+    </form>
+</div>

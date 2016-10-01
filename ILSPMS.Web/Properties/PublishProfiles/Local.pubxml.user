@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Work Publish\ILSPMS</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>09/30/2016 23:05:07</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>08/09/2016 13:56:12</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.dll">
+      <publishTime>08/17/2016 15:31:18</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.dll">
+      <publishTime>08/12/2016 13:21:44</publishTime>
+    </File>
+    <File Include="bin/cs/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/da/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/de/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/es/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/fa/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/fi/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/FluentValidation.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/fr/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/ILSPLMS.dll">
+      <publishTime>09/30/2016 23:05:07</publishTime>
+    </File>
+    <File Include="bin/ILSPMS.Common.dll">
+      <publishTime>09/30/2016 22:42:56</publishTime>
+    </File>
+    <File Include="bin/ILSPMS.Data.dll">
+      <publishTime>09/30/2016 22:42:57</publishTime>
+    </File>
+    <File Include="bin/ILSPMS.Entities.dll">
+      <publishTime>09/30/2016 22:42:56</publishTime>
+    </File>
+    <File Include="bin/ILSPMS.Services.dll">
+      <publishTime>09/30/2016 22:42:58</publishTime>
+    </File>
+    <File Include="bin/ILSPMS.Web.dll">
+      <publishTime>09/30/2016 23:04:20</publishTime>
+    </File>
+    <File Include="bin/img/logo.png">
+      <publishTime>09/09/2016 03:35:18</publishTime>
+    </File>
+    <File Include="bin/it/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/ko/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/23/2012 15:23:58</publishTime>
+    </File>
+    <File Include="bin/mk/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/03/2014 20:33:56</publishTime>
+    </File>
+    <File Include="bin/nl/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/pl/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/pt/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/ru/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/sv/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>01/28/2015 04:02:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>01/28/2015 04:02:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>01/28/2015 04:03:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/28/2015 04:02:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/28/2015 04:02:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/tr/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/10/2013 17:28:38</publishTime>
+    </File>
+    <File Include="bin/zh-CN/FluentValidation.resources.dll">
+      <publishTime>02/26/2016 09:50:52</publishTime>
+    </File>
+    <File Include="bundleconfig.json.bindings">
+      <publishTime>09/03/2016 04:47:08</publishTime>
+    </File>
+    <File Include="css/angular-cambria.css">
+      <publishTime>08/29/2016 11:19:47</publishTime>
+    </File>
+    <File Include="css/angular-material.css">
+      <publishTime>08/29/2016 11:19:47</publishTime>
+    </File>
+    <File Include="css/bootstrap.css">
+      <publishTime>09/09/2016 04:09:55</publishTime>
+    </File>
+    <File Include="css/custom.min.css">
+      <publishTime>09/29/2016 00:01:04</publishTime>
+    </File>
+    <File Include="css/font-awesome.css">
+      <publishTime>08/29/2016 11:24:42</publishTime>
+    </File>
+    <File Include="css/jquery.fancybox.css">
+      <publishTime>08/29/2016 11:19:47</publishTime>
+    </File>
+    <File Include="css/loading-bar.css">
+      <publishTime>08/29/2016 11:19:47</publishTime>
+    </File>
+    <File Include="css/site.min.css">
+      <publishTime>09/15/2016 02:27:32</publishTime>
+    </File>
+    <File Include="css/toastr.css">
+      <publishTime>09/15/2016 02:27:28</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>08/17/2016 01:36:12</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.eot">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.svg">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.ttf">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff2">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="fonts/FontAwesome.otf">
+      <publishTime>08/29/2016 11:25:01</publishTime>
+    </File>
+    <File Include="img/logo.png">
+      <publishTime>09/09/2016 03:35:18</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>09/03/2016 04:50:45</publishTime>
+    </File>
+    <File Include="js/app.min.js">
+      <publishTime>09/30/2016 02:18:41</publishTime>
+    </File>
+    <File Include="js/app/activity/activities.html">
+      <publishTime>09/30/2016 22:50:01</publishTime>
+    </File>
+    <File Include="js/app/activity/activitiesCtrl.js">
+      <publishTime>09/30/2016 02:18:37</publishTime>
+    </File>
+    <File Include="js/app/app.js">
+      <publishTime>09/28/2016 23:26:20</publishTime>
+    </File>
+    <File Include="js/app/dashboard/dashboard.html">
+      <publishTime>09/02/2016 23:54:55</publishTime>
+    </File>
+    <File Include="js/app/dashboard/dashboard.js">
+      <publishTime>09/03/2016 02:05:57</publishTime>
+    </File>
+    <File Include="js/app/division/divisions.html">
+      <publishTime>09/13/2016 23:22:52</publishTime>
+    </File>
+    <File Include="js/app/division/divisionsCtrl.js">
+      <publishTime>09/12/2016 02:49:53</publishTime>
+    </File>
+    <File Include="js/app/division/divisionViewModal.html">
+      <publishTime>09/14/2016 00:33:30</publishTime>
+    </File>
+    <File Include="js/app/division/divisionViewModalCtrl.js">
+      <publishTime>09/12/2016 03:31:27</publishTime>
+    </File>
+    <File Include="js/app/login.js">
+      <publishTime>08/30/2016 02:55:58</publishTime>
+    </File>
+    <File Include="js/app/login/loginForm.html">
+      <publishTime>09/19/2016 05:29:17</publishTime>
+    </File>
+    <File Include="js/app/login/loginFormCtrl.js">
+      <publishTime>09/19/2016 05:29:56</publishTime>
+    </File>
+    <File Include="js/app/modules/common.core.js">
+      <publishTime>08/30/2016 02:51:03</publishTime>
+    </File>
+    <File Include="js/app/modules/common.ui.js">
+      <publishTime>08/30/2016 02:51:03</publishTime>
+    </File>
+    <File Include="js/app/movement/movements.html">
+      <publishTime>09/30/2016 00:17:26</publishTime>
+    </File>
+    <File Include="js/app/movement/movementsCtrl.js">
+      <publishTime>09/30/2016 00:19:29</publishTime>
+    </File>
+    <File Include="js/app/myproject/myProjects.html">
+      <publishTime>09/28/2016 23:23:14</publishTime>
+    </File>
+    <File Include="js/app/myproject/myProjectsCtrl.js">
+      <publishTime>09/28/2016 21:27:26</publishTime>
+    </File>
+    <File Include="js/app/profile/password.html">
+      <publishTime>09/16/2016 02:28:34</publishTime>
+    </File>
+    <File Include="js/app/profile/password.js">
+      <publishTime>09/16/2016 02:35:48</publishTime>
+    </File>
+    <File Include="js/app/profile/profile.html">
+      <publishTime>09/16/2016 02:23:02</publishTime>
+    </File>
+    <File Include="js/app/profile/profileCtrl.js">
+      <publishTime>09/16/2016 02:27:09</publishTime>
+    </File>
+    <File Include="js/app/project/projects.html">
+      <publishTime>09/25/2016 15:15:06</publishTime>
+    </File>
+    <File Include="js/app/project/projectsCtrl.js">
+      <publishTime>09/25/2016 03:06:39</publishTime>
+    </File>
+    <File Include="js/app/project/projectViewModal.html">
+      <publishTime>09/19/2016 03:57:29</publishTime>
+    </File>
+    <File Include="js/app/project/projectViewModalCtrl.js">
+      <publishTime>09/15/2016 02:22:35</publishTime>
+    </File>
+    <File Include="js/app/services/apiService.js">
+      <publishTime>08/30/2016 02:51:47</publishTime>
+    </File>
+    <File Include="js/app/services/fileUploadService.js">
+      <publishTime>08/30/2016 02:54:15</publishTime>
+    </File>
+    <File Include="js/app/services/membershipService.js">
+      <publishTime>08/30/2016 03:56:45</publishTime>
+    </File>
+    <File Include="js/app/services/notificationService.js">
+      <publishTime>09/15/2016 02:25:21</publishTime>
+    </File>
+    <File Include="js/app/user/users.html">
+      <publishTime>09/13/2016 23:22:59</publishTime>
+    </File>
+    <File Include="js/app/user/users.js">
+      <publishTime>09/13/2016 23:18:30</publishTime>
+    </File>
+    <File Include="js/app/user/userViewModal.html">
+      <publishTime>09/14/2016 00:33:13</publishTime>
+    </File>
+    <File Include="js/app/user/userViewModalCtrl.js">
+      <publishTime>09/12/2016 06:42:30</publishTime>
+    </File>
+    <File Include="js/app/_layout/addButton.directive.js">
+      <publishTime>09/11/2016 05:57:32</publishTime>
+    </File>
+    <File Include="js/app/_layout/addButton.html">
+      <publishTime>09/11/2016 22:59:55</publishTime>
+    </File>
+    <File Include="js/app/_layout/searchBar.directive.js">
+      <publishTime>09/11/2016 19:50:07</publishTime>
+    </File>
+    <File Include="js/app/_layout/searchBar.html">
+      <publishTime>09/11/2016 19:52:03</publishTime>
+    </File>
+    <File Include="js/app/_layout/sideBar.directive.js">
+      <publishTime>09/02/2016 22:13:55</publishTime>
+    </File>
+    <File Include="js/app/_layout/sideBar.html">
+      <publishTime>09/18/2016 11:57:49</publishTime>
+    </File>
+    <File Include="js/app/_layout/topBar.directive.js">
+      <publishTime>09/02/2016 22:22:13</publishTime>
+    </File>
+    <File Include="js/app/_layout/topBar.html">
+      <publishTime>09/25/2016 15:25:46</publishTime>
+    </File>
+    <File Include="js/app/_layout/_root.js">
+      <publishTime>09/28/2016 21:41:45</publishTime>
+    </File>
+    <File Include="js/login.min.js">
+      <publishTime>09/19/2016 05:30:11</publishTime>
+    </File>
+    <File Include="js/vendors.min.js">
+      <publishTime>09/03/2016 05:02:21</publishTime>
+    </File>
+    <File Include="js/vendors/angucomplete-alt.js">
+      <publishTime>08/29/2016 11:18:46</publishTime>
+    </File>
+    <File Include="js/vendors/angular-animate.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-aria.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-base64.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-cambria.js">
+      <publishTime>09/03/2016 05:02:06</publishTime>
+    </File>
+    <File Include="js/vendors/angular-cookies.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-file-upload.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-material.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-recaptcha.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-route.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular-validator.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/angular.js">
+      <publishTime>08/29/2016 11:18:46</publishTime>
+    </File>
+    <File Include="js/vendors/bootstrap.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/clipboard.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/jquery.fancybox-media.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/jquery.fancybox.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/jquery.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/loading-bar.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/ngclipboard.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/smart-table.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/toastr.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="js/vendors/ui-bootstrap-tpls.js">
+      <publishTime>08/29/2016 11:18:47</publishTime>
+    </File>
+    <File Include="login.html">
+      <publishTime>09/25/2016 15:26:21</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/24/2016 02:47:16</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>09/30/2016 23:04:30</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>08/17/2016 01:36:12</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>08/17/2016 01:36:12</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>08/17/2016 01:36:12</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>08/17/2016 01:36:12</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/30/2016 23:04:24</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

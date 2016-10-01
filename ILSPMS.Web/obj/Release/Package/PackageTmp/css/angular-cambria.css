@@ -1,0 +1,24 @@
+div#bg_box_generated
+{
+	background-color:#ECECEC;
+	z-index:90000;
+	position:absolute;
+	top:0px;
+    bottom:0px;
+	left:0px;
+    right:0px;
+	opacity:0.9
+}
+
+#msg_box_container_generated
+{
+    z-index: 90001;
+    position: absolute;
+    box-shadow: 0px 3px 11px #666;
+   -webkit-box-shadow: 0px 3px 11px #666;
+   -moz-box-shadow: 0px 3px 11px #666;
+}
+
+#msg_box_container_generated .panel-body {
+    padding:20px 40px;
+}

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="ilsApp" ng-strict-di>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ILS-PMS</title>
+
+    <link href="css/site.min.css" rel="stylesheet">
+    <link href="css/custom.min.css" rel="stylesheet">
+    <script src="js/vendors.min.js"></script>
+    <script src="js/app.min.js"></script>
+
+    <base href="/">
+
+</head>
+<body class="body" ng-controller="rootCtrl">
+    <div class="container">
+        <top-bar></top-bar>
+        <div class="main-col">
+            <side-bar></side-bar>
+            <div class="page" ng-view></div>
+        </div>
+        <div class="footer">
+            <div class="bottom-content">
+                <b>ILS - PMS &copy; 2016</b>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -24,7 +24,7 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.AddedByName, v => v.MapFrom(s => s.AddedBy.FirstName + " " + s.AddedBy.LastName))
                 .ForMember(d => d.Milestone, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().Milestone.Name : ""))
                 .ForMember(d => d.Activity, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementType.Name : ""))
-                .ForMember(d => d.BudgetUtilized, v => v.MapFrom(s => s.ProjectActivities.Count() > 0 ? s.ProjectActivities.Sum(pa => pa.BudgetUtilized) : 0))
+                .ForMember(d => d.BudgetUtilized, v => v.MapFrom(s => s.ProjectActivities.Where(pa => !pa.Deleted).Count() > 0 ? s.ProjectActivities.Where(pa => !pa.Deleted).Sum(pa => pa.BudgetUtilized) : 0))
                 .ForMember(d => d.MilestoneOrder, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().Milestone.Order : 0))
                 .ForMember(d => d.ApproverRoleID, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRoleID : 0))
                 .ForMember(d => d.ApproverRoleName, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? (s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRoleID != null ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRole.Name : "" ) : ""))
@@ -37,6 +37,7 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.Year, v => v.MapFrom(s => s.DateCreated.Year.ToString()));
             CreateMap<ProjectMovement, ProjectMovementViewModel>()
                 .ForMember(d => d.ApproverName, v => v.MapFrom(s => s.ApproverUserID != null ? s.ApproverUser.FirstName + " " + s.ApproverUser.LastName : ""))
+                .ForMember(d => d.ApproverRoleName, v => v.MapFrom(s => s.ApproverRoleID != null ? s.ApproverRole.Name : ""))
                 .ForMember(d => d.ProjectManagerName, v => v.MapFrom(s => s.ProjectManager.FirstName + " " + s.ProjectManager.LastName))
                 .ForMember(d => d.ProjectMovementTypeName, v => v.MapFrom(s => s.ProjectMovementType.Name));
             CreateMap<ProjectActivity, ProjectActivityViewModel>()

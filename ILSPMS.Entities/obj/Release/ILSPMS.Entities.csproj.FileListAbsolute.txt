@@ -1,0 +1,5 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\bin\Release\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\bin\Release\ILSPMS.Entities.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Release\ILSPMS.Entities.csprojResolveAssemblyReference.cache
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Release\ILSPMS.Entities.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Entities\obj\Release\ILSPMS.Entities.pdb

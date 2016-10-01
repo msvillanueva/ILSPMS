@@ -1,0 +1,54 @@
+﻿<div class="row mt40">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" angular-validator name="fillForm">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="firstName" class="col-sm-3 control-label">First name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="viewModel.FirstName" name="firstName" id="firstName" placeholder="First Name"
+                                   validate-on="blur" required required-message="'First Name is required'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-3 control-label">Last name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="viewModel.LastName" name="lastname" id="lastname" placeholder="First Name"
+                                   validate-on="blur" required required-message="'Last Name is required'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-3 control-label">Username</label>
+                        <div class="col-sm-9" ng-if="!availableUsername">
+                            <input type="text" class="form-control" ng-model="viewModel.Username" name="username" id="username" placeholder="Username"
+                                   validate-on="blur" required required-message="'Username is required'">
+                            <p class="help-block">Please specify your username. Username can be used at login and cannot be changed once defined.</p>
+                        </div>
+                        <div class="col-sm-9" ng-if="availableUsername">
+                            <span class="form-control" name="username" id="username" ng-disabled="true">
+                                {{viewModel.Username}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <span class="form-control" name="email" id="email" placeholder="email@example.com" ng-disabled="true">
+                                {{viewModel.Email}}
+                            </span>
+                            <p class="help-block">Either email or username is used on login.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-primary" ng-disabled="fillForm.$invalid || dataLoading" ng-click="save()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ namespace ILSPMS.Services
         public void Submit(Project project)
         {
             var isReadyNextMilestone = false;
-            var latestMovement = project.ProjectMovements.OrderByDescending(s => s.DateCreated)
+            var latestMovement = project.ProjectMovements.OrderByDescending(s => s.ID)
                 .FirstOrDefault();
             var latestMileStone = latestMovement.Milestone;
 

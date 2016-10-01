@@ -1,0 +1,5 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\bin\Release\ILSPMS.Common.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\bin\Release\ILSPMS.Common.pdb
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Release\ILSPMS.Common.csprojResolveAssemblyReference.cache
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Release\ILSPMS.Common.dll
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Common\obj\Release\ILSPMS.Common.pdb
