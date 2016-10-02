@@ -1,20 +1,16 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('myProjectsCtrl', myProjectsCtrl);
-    myProjectsCtrl.$inject = ['$scope', '$uibModal', 'apiService', 'notificationService', 'cambria'];
+    app.controller('myApprovalsCtrl', myApprovalsCtrl);
+    myApprovalsCtrl.$inject = ['$scope', '$uibModal', 'apiService', 'notificationService', 'cambria'];
 
-    function myProjectsCtrl($scope, $uibModal, apiService, notificationService, cambria) {
+    function myApprovalsCtrl($scope, $uibModal, apiService, notificationService, cambria) {
         $scope.pageClass = 'page-myprojects';
         $scope.loadingData = true;
         $scope.projects = [];
         $scope.tableRowCollection = [];
         $scope.topMilestone = 0;
-        $scope.forApproval = false;
-        $scope.divisions = [];
-        $scope.divisionID = '0';
-        $scope.years = [];
-        $scope.selectedYear = $scope.year.toString();
+        $scope.forApproval = true;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
@@ -30,12 +26,11 @@
 
         function search() {
             $scope.loadingData = true;
+
             var config = {
                 params: {
                     filter: $scope.filter,
-                    year: $scope.selectedYear,
-                    forApproval: $scope.forApproval,
-                    divisionID: $scope.divisionID
+                    forApproval: $scope.forApproval
                 }
             };
 
@@ -97,26 +92,7 @@
             row.Hovered = false;
         }
 
-        function init() {
-            if ($scope.isDirector) {
-                apiService.get('/api/divisions/', null,
-                    function (result) {
-                        $scope.divisions = result.data.items;
-                    },
-                    notificationService.responseFailed);
-            }
-
-            apiService.post('/api/projects/years', null,
-                function (result) {
-                    $scope.years = result.data.items;
-
-                },
-                notificationService.responseFailed);
-
-            $scope.search();
-        }
-
-        init();
+        $scope.search();
     }
 
 })(angular.module('ilsApp'));

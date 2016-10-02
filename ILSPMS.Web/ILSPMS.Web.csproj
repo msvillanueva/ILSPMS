@@ -222,6 +222,8 @@
     <Content Include="js\app\modules\common.ui.js" />
     <Content Include="js\app\movement\movements.html" />
     <Content Include="js\app\movement\movementsCtrl.js" />
+    <Content Include="js\app\myproject\myApprovals.html" />
+    <Content Include="js\app\myproject\myApprovalsCtrl.js" />
     <Content Include="js\app\myproject\myProjects.html" />
     <Content Include="js\app\myproject\myProjectsCtrl.js" />
     <Content Include="js\app\profile\password.html" />

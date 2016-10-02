@@ -2,13 +2,13 @@
     <div class="view-header">
         <search-bar></search-bar>
         <div class="input-group pull-right ms20" ng-if="isDirector && !forApproval">
-            <select class="form-control" ng-model="$parent.divisionID" ng-change="search()">
+            <select class="form-control" ng-model="divisionID" ng-change="search()">
                 <option value="0" label="All divisions" selected>All Divisions</option>
                 <option ng-repeat="row in divisions" label="{{row.Name}}" value="{{row.ID}}">{{row.Name}}</option>
             </select>
         </div>
-        <div class="input-group pull-right {{isDirector ? '' : 'ms20'}}" ng-if="!forApproval">
-            <select class="form-control" ng-model="$parent.selectedYear" ng-change="search()">
+        <div class="input-group pull-right" ng-if="!forApproval">
+            <select class="form-control" ng-model="selectedYear" ng-change="search()">
                 <option ng-repeat="row in years" label="{{row}}" value="{{row}}">{{row}}</option>
             </select>
         </div>

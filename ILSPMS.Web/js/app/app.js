@@ -54,6 +54,13 @@
                 menu: '#menuMyProjects',
                 resolve: isLoggedNotAdmin
             })
+            .when("/my-approvals", {
+                title: 'Projects for Approval',
+                templateUrl: "js/app/myproject/myProjects.html",
+                controller: "myApprovalsCtrl",
+                menu: '#menuMyApprovals',
+                resolve: isLoggedNotAdminNotPM
+            })
             .when("/project-movements/:id", {
                 title: 'My Projects',
                 templateUrl: "js/app/movement/movements.html",
@@ -91,7 +98,7 @@
 
         // route
         $rootScope.$on('$routeChangeSuccess', function () {
-            document.title = 'PMS | ' + $route.current.title;
+            document.title = 'PLMS | ' + $route.current.title;
             var subLogo = document.getElementsByClassName('sub-logo')[0];
             if (subLogo)
                 document.getElementsByClassName('sub-logo')[0].innerHTML = ' | ' + $route.current.title;
@@ -147,6 +154,13 @@
     function isLoggedNotAdmin(membershipService, $rootScope, $location, $q) {
         var deferred = $q.defer();
         if ($rootScope.repository.loggedUser.role == 1) {
+            return deferred.promise;
+        }
+    }
+
+    function isLoggedNotAdminNotPM(membershipService, $rootScope, $location, $q) {
+        var deferred = $q.defer();
+        if ($rootScope.repository.loggedUser.role == 1 || $rootScope.repository.loggedUser.role == 2) {
             return deferred.promise;
         }
     }

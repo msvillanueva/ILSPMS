@@ -45,7 +45,6 @@
         }
 
         function showMovements(row) {
-            console.log(row);
             $scope.tableRowCollection = row.Movements;
             $scope.movements = [].concat($scope.tableRowCollection);
 

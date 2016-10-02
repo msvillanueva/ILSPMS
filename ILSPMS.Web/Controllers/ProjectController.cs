@@ -37,8 +37,9 @@ namespace ILSPMS.Web.Controllers
             _projectService = projectService;
         }
 
-        [Route("{filter?}/{all?}/{divisionID?}/{forApproval?}")]
-        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, bool all = false, int? divisionID = 0, bool forApproval = false)
+        [Route("{filter?}/{divisionID?}/{forApproval?}/{year?}")]
+        [HttpGet]
+        public HttpResponseMessage Get(HttpRequestMessage request, string filter = null, int? divisionID = 0, bool forApproval = false, int year = 0)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -56,8 +57,6 @@ namespace ILSPMS.Web.Controllers
                         && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID == currentUser.RoleID
                         && (s.DivisionID == currentUser.DivisionID || currentUser.RoleID == (int)Enumerations.Role.DeputyExecDir
                             || currentUser.RoleID == (int)Enumerations.Role.ExecDir)
-                        //&& (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                        //&& (!all || s.DateCreated.Year == DateTime.Now.Year)
                         )
                     .OrderBy(m => m.Name)
                     .ToList();
@@ -69,7 +68,8 @@ namespace ILSPMS.Web.Controllers
                         projects = _projectRepository
                             .FindBy(s => !s.Deleted && s.ProjectManagerID == currentUser.ID
                                     && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                                    && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                                    && (year == 0 || s.DateCreated.Year == year)
+                                    )
                                 .OrderBy(m => m.Name)
                                 .ToList();
                     }
@@ -78,7 +78,8 @@ namespace ILSPMS.Web.Controllers
                         projects = _projectRepository
                             .FindBy(s => !s.Deleted && s.DivisionID == currentUser.DivisionID
                                 && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                                && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                                && (year == 0 || s.DateCreated.Year == year)
+                                )
                             .OrderBy(m => m.Name)
                             .ToList();
                     }
@@ -88,7 +89,8 @@ namespace ILSPMS.Web.Controllers
                             .FindBy(s => !s.Deleted
                                 && (divisionID == 0 || s.DivisionID == divisionID)
                                 && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
-                                && (!all || s.DateCreated.Year == DateTime.Now.Year))
+                                && (year == 0 || s.DateCreated.Year == year)
+                                )
                             .OrderBy(m => m.Name)
                             .ToList();
                     }
@@ -98,6 +100,24 @@ namespace ILSPMS.Web.Controllers
 
                 var list = Mapper.Map<List<Project>, List<ProjectViewModel>>(projects);
                 response = request.CreateResponse(HttpStatusCode.OK, new { items = list, ms = topOrder });
+
+                return response;
+            });
+        }
+
+        [Route("years")]
+        [HttpPost]
+        public HttpResponseMessage ProjectYears(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var projectYears = _projectRepository.GetAll()
+                    .Select(s => s.DateCreated.Year)
+                    .Distinct().OrderBy(s => s).ToList();
+
+                response = request.CreateResponse(HttpStatusCode.OK, new { items = projectYears });
 
                 return response;
             });

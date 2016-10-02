@@ -25,6 +25,12 @@
                     <span class="tooltiptext tooltip-right">My Projects</span>
                 </a>
             </li>
+            <li class="sm-active menu-item tooltip-nav" id="menuMyApprovals" ng-if="!isAdmin && !isPM">
+                <a ng-href="#/my-approvals">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="tooltiptext tooltip-right">Projects for approval</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div> 

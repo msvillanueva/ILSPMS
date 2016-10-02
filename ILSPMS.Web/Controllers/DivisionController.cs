@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace ILSPMS.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     [RoutePrefix("api/divisions")]
     public class DivisionController : ApiControllerBase
     {
@@ -45,6 +45,7 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("update")]
         [HttpPost]
         public HttpResponseMessage CreateEdit(HttpRequestMessage request, DivisionViewModel model)
@@ -89,6 +90,7 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("remove")]
         [HttpPost]
         public HttpResponseMessage Archive(HttpRequestMessage request, DivisionViewModel model)
