@@ -20,6 +20,8 @@
         $scope.init = init;
         $scope.create = create;
         $scope.archive = archive;
+        $scope.upload = upload;
+        $scope.files = files;
 
         function init() {
             var config = {
@@ -71,6 +73,34 @@
             $uibModal.open({
                 templateUrl: 'js/app/activity/activityViewModal.html',
                 controller: 'activityViewModalCtrl',
+                scope: $scope,
+                backdrop: 'static',
+                keyboard: false
+            }).result.then(function ($scope) {
+                clearSearch();
+            }, function () {
+            });
+        }
+
+        function upload(model) {
+            $scope.activity = angular.copy(model);
+            $uibModal.open({
+                templateUrl: 'js/app/activity/uploadModal.html',
+                controller: 'uploadModalCtrl',
+                scope: $scope,
+                backdrop: 'static',
+                keyboard: false
+            }).result.then(function ($scope) {
+                clearSearch();
+            }, function () {
+            });
+        }
+
+        function files(model) {
+            $scope.activity = angular.copy(model);
+            $uibModal.open({
+                templateUrl: 'js/app/activity/filesModal.html',
+                controller: 'filesModalCtrl',
                 scope: $scope,
                 backdrop: 'static',
                 keyboard: false

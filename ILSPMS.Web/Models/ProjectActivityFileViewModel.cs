@@ -15,7 +15,7 @@ namespace ILSPMS.Web.Models
 
         public string Link
         {
-            get { return $"files/ProjectFiles/{this.ID}/{this.Filename}"; }
+            get { return $"files/activity/{this.ID}/{this.Filename}"; }
         }
     }
 }

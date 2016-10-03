@@ -19,7 +19,7 @@
                 var $file = $files[i];
                 (function (index) {
                     $rootScope.upload[index] = $upload.upload({
-                        url: "api/projectmovements/image/upload?id=" + id,
+                        url: "api/files/upload?id=" + id,
                         method: "POST",
                         file: $file
                     }).progress(function (evt) {

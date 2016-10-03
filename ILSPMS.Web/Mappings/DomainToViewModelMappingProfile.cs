@@ -42,6 +42,7 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.ProjectMovementTypeName, v => v.MapFrom(s => s.ProjectMovementType.Name));
             CreateMap<ProjectActivity, ProjectActivityViewModel>()
                 .ForMember(d => d.ProjectManagerName, v => v.MapFrom(s => s.User.FirstName + " " + s.User.LastName));
+            CreateMap<ProjectActivityFile, ProjectActivityFileViewModel>();
         }
     }
 }

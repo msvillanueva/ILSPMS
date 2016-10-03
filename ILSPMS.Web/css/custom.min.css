@@ -365,10 +365,10 @@ md-progress-linear.card-progress {
 .milestone-card {
     height:80px;
     float:left;
-    margin-right:15px;
+    margin-right:10px;
     background-color:#b9f6ca;
     position: relative;
-    width:200px;
+    width:130px;
 }
     .milestone-card::after {
         content: "";
@@ -402,7 +402,7 @@ md-progress-linear.card-progress {
 }
 
 .milestone-title {
-    margin:0 0 0 70px;
+    margin:0 0 0 55px;
     position:absolute;
     font-weight:bold;
     z-index:3;
