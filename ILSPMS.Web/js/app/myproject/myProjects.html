@@ -86,7 +86,7 @@
                         <i class="fa fa-thumbs-o-up"></i>
                         <span class="tooltiptext tooltip-left">Approve</span>
                     </a>
-                    <a class="btn btn-danger mt10 tooltip-nav" ng-click="disapprove(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role && forApproval">
+                    <a class="btn btn-danger mt10 tooltip-nav" ng-click="decline(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role && forApproval">
                         <i class="fa fa-thumbs-o-down"></i>
                         <span class="tooltiptext tooltip-left">Disapprove</span>
                     </a>

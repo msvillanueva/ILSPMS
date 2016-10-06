@@ -29,7 +29,7 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.ApproverRoleID, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRoleID : 0))
                 .ForMember(d => d.ApproverRoleName, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? (s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRoleID != null ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRole.Name : "" ) : ""))
                 .ForMember(d => d.Year, v => v.MapFrom(s => s.DateCreated.Year.ToString()))
-                .ForMember(d => d.LockSubmit, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementTypeID != (int)Enumerations.ProjectMovementType.Init : false));
+                .ForMember(d => d.LockSubmit, v => v.MapFrom(s => s.ProjectMovements.Count() > 0 ? s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementTypeID != (int)Enumerations.ProjectMovementType.Init && s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementTypeID != (int)Enumerations.ProjectMovementType.Rejected : false));
             CreateMap<Project, NewProjectMovementViewModel>()
                 .ForMember(d => d.DivisionName, v => v.MapFrom(s => s.Division.Name))
                 .ForMember(d => d.ProjectManager, v => v.MapFrom(s => s.ProjectManagerID != null ? s.ProjectManager.FirstName + " " + s.ProjectManager.LastName : "Not assigned"))

@@ -52,9 +52,11 @@ namespace ILSPMS.Web.Controllers
                 if (forApproval && currentUser.RoleID != (int)Enumerations.Role.PM)
                 {
                     projects = _projectRepository
-                    .FindBy(s => !s.Deleted && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault() != null
-                        && !s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().IsApproved
-                        && s.ProjectMovements.OrderByDescending(pm => pm.DateCreated).FirstOrDefault().ApproverRoleID == currentUser.RoleID
+                    .FindBy(s => !s.Deleted && s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault() != null
+                        && !s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().IsApproved
+                        && (s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementTypeID == (int)Enumerations.ProjectMovementType.ForApproval
+                            || s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ProjectMovementTypeID == (int)Enumerations.ProjectMovementType.NextApproval)
+                        && s.ProjectMovements.OrderByDescending(pm => pm.ID).FirstOrDefault().ApproverRoleID == currentUser.RoleID
                         && (s.DivisionID == currentUser.DivisionID || currentUser.RoleID == (int)Enumerations.Role.DeputyExecDir
                             || currentUser.RoleID == (int)Enumerations.Role.ExecDir)
                         )
@@ -76,7 +78,7 @@ namespace ILSPMS.Web.Controllers
                     else if (currentUser.RoleID == (int)Enumerations.Role.DivisionChief)
                     {
                         projects = _projectRepository
-                            .FindBy(s => !s.Deleted && s.DivisionID == currentUser.DivisionID
+                            .FindBy(s => !s.Deleted && (s.DivisionID == currentUser.DivisionID || s.ProjectManagerID == currentUser.ID)
                                 && (filter == null || s.Name.ToLower().Contains(filter) || s.Division.Name.Contains(filter))
                                 && (year == 0 || s.DateCreated.Year == year)
                                 )
@@ -181,7 +183,7 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Division Officer")]
+        [Authorize(Roles = "Division Chief")]
         [Route("assignpm")]
         [HttpPost]
         public HttpResponseMessage Assign(HttpRequestMessage request, ProjectViewModel model)
@@ -233,7 +235,7 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Project Manager")]
+        [Authorize(Roles = "Project Manager, Division Chief")]
         [Route("submit")]
         [HttpPost]
         public HttpResponseMessage SubmitProject(HttpRequestMessage request, ProjectViewModel model)
@@ -281,6 +283,37 @@ namespace ILSPMS.Web.Controllers
                         project.Approve(currentUser);
                         _unitOfWork.Commit();
                         _projectService.Submit(project);
+                    }
+
+                    var obj = _projectRepository.GetSingle(model.ID);
+                    var item = Mapper.Map<ProjectViewModel>(project);
+
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = item });
+                }
+                else
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = false });
+
+                return response;
+            });
+        }
+
+        [Authorize(Roles = "Division Chief, Deputy Executive Director, Executive Director, APD")]
+        [Route("decline")]
+        [HttpPost]
+        public HttpResponseMessage DeclineProject(HttpRequestMessage request, ProjectViewModel model)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (ModelState.IsValid)
+                {
+                    var currentUser = _userRepository.GetSingleByUsername(User.Identity.Name.Trim().ToLower());
+                    var project = _projectRepository.GetSingle(model.ID);
+                    if (project != null)
+                    {
+                        project.Decline(currentUser);
+                        _unitOfWork.Commit();
                     }
 
                     var obj = _projectRepository.GetSingle(model.ID);

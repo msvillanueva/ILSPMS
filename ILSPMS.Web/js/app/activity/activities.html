@@ -52,8 +52,8 @@
                     <td class="last">
                         <a class="btn btn-default" ng-click="create(row)"><i class="fa fa-edit"></i> View</a>
                         <a class="btn btn-default" ng-click="files(row)"><i class="fa fa-file-archive-o"></i> Files</a>
-                        <a class="btn btn-default" ng-click="upload(row)"><i class="fa fa-upload"></i> Upload</a>
-                        <a class="btn btn-danger" ng-click="archive($index, row)"><i class="fa fa-trash"></i> Archive</a>
+                        <a class="btn btn-default" ng-click="upload(row)" ng-if="canAdd && !IsSubmitted"><i class="fa fa-upload"></i> Upload</a>
+                        <a class="btn btn-danger" ng-click="archive($index, row)" ng-if="canAdd && !IsSubmitted"><i class="fa fa-trash"></i> Archive</a>
                     </td>
                     </tr>
                 </tbody>

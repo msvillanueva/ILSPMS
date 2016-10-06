@@ -18,6 +18,7 @@
         $scope.hideMenu = hideMenu;
         $scope.submit = submit;
         $scope.approve = approve;
+        $scope.decline = decline;
 
         function clearSearch() {
             $scope.filter = '';
@@ -71,6 +72,24 @@
                 if (click) {
                     apiService.post(
                         '/api/projects/approve/',
+                        row,
+                        function (response) {
+                            if (response.data.success)
+                                $scope.search();
+                            else
+                                notificationService.displayError(response.data.message);
+                        },
+                        notificationService.responseFailed
+                    );
+                }
+            });
+        }
+
+        function decline(row) {
+            cambria.cConfirm('Are you sure you want to decline the request for approval for project<br/><b>' + row.Name + '</b>?', 'CONFIRM ACTION', function (click) {
+                if (click) {
+                    apiService.post(
+                        '/api/projects/decline/',
                         row,
                         function (response) {
                             if (response.data.success)

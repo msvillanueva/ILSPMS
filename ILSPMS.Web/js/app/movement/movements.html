@@ -42,7 +42,7 @@
                     <tr ng-repeat="row in movements">
                         <td>{{row.DateCreated | date:'dd MMM yyyy'}}</td>
                         <td>{{row.ProjectMovementTypeName}}</td>
-                        <td>{{row.ProjectMovementTypeName == 'Approved' ? row.ApproverName : row.ApproverRoleName}}</td>
+                        <td>{{row.ProjectMovementTypeName == 'Approved' || row.ProjectMovementTypeName == 'Rejected' ? row.ApproverName : row.ApproverRoleName}}</td>
                         <td>{{row.ProjectManagerName }}</td>
                     </tr>
                 </tbody>

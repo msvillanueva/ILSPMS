@@ -26,7 +26,7 @@
                             <td>{{row.Name}}</td>
                             <td class="last">
                                 <a class="btn btn-default" href="/{{row.Link}}" download><i class="fa fa-download"></i> Download</a>
-                                <a class="btn btn-danger" ng-click="archiveFile($index, row)"><i class="fa fa-trash"></i> Archive</a>
+                                <a class="btn btn-danger" ng-click="archiveFile($index, row)" ng-if="canAdd && !IsSubmitted"><i class="fa fa-trash"></i> Archive</a>
                             </td>
                         </tr>
                     </tbody>

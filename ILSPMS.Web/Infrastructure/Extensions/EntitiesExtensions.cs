@@ -55,5 +55,34 @@ namespace ILSPMS.Web
                 project.ProjectMovements.Add(newMovement);
             }
         }
+
+        public static void Decline(this Project project, User user)
+        {
+            var latestMovement = project.ProjectMovements.OrderByDescending(s => s.DateCreated).FirstOrDefault();
+            if (latestMovement != null && latestMovement.ApproverRoleID != null && !latestMovement.IsApproved)
+            {
+                var newMovement = new ProjectMovement()
+                {
+                    ApproverRoleID = null,
+                    ApproverUserID = user.ID,
+                    DateApproved = DateTime.Now,
+                    DateSubmitted = null,
+                    ApproverRole = null,
+                    ApproverUser = user,
+                    DateCreated = DateTime.Now,
+                    IsApproved = false,
+                    IsSubmitted = false,
+                    Milestone = latestMovement.Milestone,
+                    MilestoneID = latestMovement.MilestoneID,
+                    Project = latestMovement.Project,
+                    ProjectID = latestMovement.ProjectID,
+                    ProjectManager = latestMovement.ProjectManager,
+                    ProjectManagerID = latestMovement.ProjectManagerID,
+                    ProjectMovementTypeID = (int)Enumerations.ProjectMovementType.Rejected
+                };
+                project.ProjectMovements.Add(newMovement);
+
+            }
+        }
     }
 }
