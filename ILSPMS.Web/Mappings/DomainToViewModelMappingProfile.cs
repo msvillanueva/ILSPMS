@@ -39,6 +39,7 @@ namespace ILSPMS.Web.Mappings
                 .ForMember(d => d.ApproverName, v => v.MapFrom(s => s.ApproverUserID != null ? s.ApproverUser.FirstName + " " + s.ApproverUser.LastName : ""))
                 .ForMember(d => d.ApproverRoleName, v => v.MapFrom(s => s.ApproverRoleID != null ? s.ApproverRole.Name : ""))
                 .ForMember(d => d.ProjectManagerName, v => v.MapFrom(s => s.ProjectManager.FirstName + " " + s.ProjectManager.LastName))
+                .ForMember(d => d.ProjectName, v => v.MapFrom(s => s.Project.Name))
                 .ForMember(d => d.ProjectMovementTypeName, v => v.MapFrom(s => s.ProjectMovementType.Name));
             CreateMap<ProjectActivity, ProjectActivityViewModel>()
                 .ForMember(d => d.ProjectManagerName, v => v.MapFrom(s => s.User.FirstName + " " + s.User.LastName));

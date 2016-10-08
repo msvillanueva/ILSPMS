@@ -31,7 +31,9 @@
 
                 if ($scope.viewModel.ID == 0) {
                     notificationService.displaySuccess('New user has been added successfully.');
-                    $scope.users.push(angular.copy(response.data.item));
+                    $scope.tableRowCollection.push(angular.copy(response.data.item));
+                    $scope.users = [].concat($scope.tableRowCollection);
+
                     $scope.viewModel = {};
                 }
                 else {

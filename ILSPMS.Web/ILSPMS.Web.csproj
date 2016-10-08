@@ -154,6 +154,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\ProjectActivityController.cs" />
     <Compile Include="Controllers\ProjectActivityFileController.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Infrastructure\Validators\LoginViewModelValidator.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Models\ChartLabelsItemsViewModel.cs" />
     <Compile Include="Models\DivisionViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\NewProjectMovementViewModel.cs" />
@@ -227,7 +229,6 @@
     <Content Include="js\app\modules\common.ui.js" />
     <Content Include="js\app\movement\movements.html" />
     <Content Include="js\app\movement\movementsCtrl.js" />
-    <Content Include="js\app\myproject\myApprovals.html" />
     <Content Include="js\app\myproject\myApprovalsCtrl.js" />
     <Content Include="js\app\myproject\myProjects.html" />
     <Content Include="js\app\myproject\myProjectsCtrl.js" />
@@ -263,6 +264,7 @@
     <Content Include="js\vendors\angular-aria.js" />
     <Content Include="js\vendors\angular-base64.js" />
     <Content Include="js\vendors\angular-cambria.js" />
+    <Content Include="js\vendors\angular-chart.js" />
     <Content Include="js\vendors\angular-cookies.js" />
     <Content Include="js\vendors\angular-file-upload.js" />
     <Content Include="js\vendors\angular-material.js" />
@@ -271,6 +273,8 @@
     <Content Include="js\vendors\angular-validator.js" />
     <Content Include="js\vendors\angular.js" />
     <Content Include="js\vendors\bootstrap.js" />
+    <Content Include="js\vendors\Chart.bundle.js" />
+    <Content Include="js\vendors\Chart.js" />
     <Content Include="js\vendors\clipboard.js" />
     <Content Include="js\vendors\jquery.fancybox-media.js" />
     <Content Include="js\vendors\jquery.fancybox.js" />

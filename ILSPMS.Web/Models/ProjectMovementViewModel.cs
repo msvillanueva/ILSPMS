@@ -24,5 +24,6 @@ namespace ILSPMS.Web.Models
         public string ProjectManagerName { get; set; }
         public string ApproverName { get; set; }
         public string ApproverRoleName { get; set; }
+        public string ProjectName { get; set; }
     }
 }

@@ -22,7 +22,7 @@
             <i>&nbsp;Fetching data..</i>
             <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
         </div>
-        <div class="col-md-4 mt20" ng-repeat="row in projects">
+        <div class="col-md-4 mt20" ng-repeat="row in projects.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
             <div class="card-item" ng-mouseenter="popMenu($event, row)" ng-mouseleave="hideMenu($event, row)">
                 <div class="card-title ps10">
                     {{row.Name}}
@@ -95,11 +95,16 @@
                         <span class="tooltiptext tooltip-left">Movements</span>
                     </a>
                     <a class="btn btn-default mt10 tooltip-nav" ng-href="#/project-activities/{{row.ID}}">
-                        <i class="fa fa-file-text-o"></i>
+                        <i class="fa fa-pencil-square-o"></i>
                         <span class="tooltiptext tooltip-left">Activities</span>
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="clearfix text-center" ng-hide="projects.length <= itemsPerPage">
+            <uib-pagination total-items="projects.length" ng-model="currentPage" 
+                        class="pagination" items-per-page="itemsPerPage">
+            </uib-pagination>
         </div>
     </div>
 </div>

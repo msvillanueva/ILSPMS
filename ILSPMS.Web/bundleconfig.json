@@ -33,7 +33,9 @@
       "js/vendors/clipboard.js",
       "js/vendors/ngclipboard.js",
       "js/vendors/angular-aria.js",
-      "js/vendors/angular-material.js"
+      "js/vendors/angular-material.js",
+      "js/vendors/Chart.js",
+      "js/vendors/angular-chart.js"
     ]
   },
   {

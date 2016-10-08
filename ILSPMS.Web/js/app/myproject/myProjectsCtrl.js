@@ -15,6 +15,10 @@
         $scope.divisionID = '0';
         $scope.years = [];
         $scope.selectedYear = $scope.year.toString();
+        $scope.viewby = 6;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;

@@ -11,6 +11,10 @@
         $scope.tableRowCollection = [];
         $scope.topMilestone = 0;
         $scope.forApproval = true;
+        $scope.viewby = 6;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;

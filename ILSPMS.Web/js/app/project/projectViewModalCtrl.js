@@ -26,7 +26,9 @@
             if (response.data.success) {
                 if ($scope.viewModel.ID == 0) {
                     notificationService.displaySuccess('New project has been added successfully.');
-                    $scope.projects.push(angular.copy(response.data.item));
+                    $scope.tableRowCollection.push(angular.copy(response.data.item));
+                    $scope.projects = [].concat($scope.tableRowCollection);
+
                     $scope.viewModel = {};
                 }
                 else {

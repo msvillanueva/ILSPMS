@@ -125,6 +125,24 @@ namespace ILSPMS.Services
                     };
                     project.ProjectMovements.Add(newMovement);
                 }
+                else
+                {
+                    var newMovement = new ProjectMovement()
+                    {
+                        ProjectMovementTypeID = (int)Enumerations.ProjectMovementType.Closed,
+                        ApproverRoleID = null,
+                        ApproverUserID = null,
+                        DateApproved = null,
+                        DateCreated = DateTime.Now,
+                        DateSubmitted = DateTime.Now,
+                        MilestoneID = latestMileStone.ID,
+                        IsSubmitted = true,
+                        ProjectID = project.ID,
+                        IsApproved = true,
+                        ProjectManagerID = (int)project.ProjectManagerID
+                    };
+                    project.ProjectMovements.Add(newMovement);
+                }
             }
 
             _unitOfWork.Commit();
