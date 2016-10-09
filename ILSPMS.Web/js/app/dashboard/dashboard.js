@@ -9,7 +9,7 @@
         $scope.closedProjectData = {};
         $scope.approvals = 0;
         $scope.forSubmit = 0;
-        $scope.movements = ["1", "2", "3"];
+        $scope.movements = [];
         $scope.totalMovements = 0;
         $scope.totalActivities = 0;
 
@@ -29,7 +29,30 @@
         }
 
         function showAdmin() {
+            $scope.loadingData = true;
+            apiService.get('/api/admindashboard/', null,
+                adminLoadComplete,
+                notificationService.responseFailed);
+        }
 
+        function adminLoadComplete(response) {
+            $scope.loadingData = false;
+
+            $scope.projects = response.data.projects;
+            $scope.allProjects = response.data.allProjects;
+            $scope.users = response.data.users;
+
+            $scope.cmLabels = response.data.movementsData.Labels;
+            $scope.cmData = [
+              response.data.movementsData.Items
+            ];
+            $scope.cmOptions = {
+                scales: {
+                    yAxes: [{
+                        ticks: { min: 0, maxTicksLimit: 6 }
+                    }]
+                }
+            };
         }
 
         function showUser() {

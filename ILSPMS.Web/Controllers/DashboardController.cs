@@ -112,7 +112,7 @@ namespace ILSPMS.Web.Controllers
                     activities.AddRange(proj.ProjectActivities);
                 }
 
-                foreach(var movement in movements.OrderByDescending(s => s.ID).Take(15).ToList())
+                foreach(var movement in movements.OrderByDescending(s => s.ID).Take(17).ToList())
                 {
                     var mvm = Mapper.Map<ProjectMovementViewModel>(movement);
                     var approver = mvm.ApproverName != "" ? $"-{mvm.ApproverName}" : "";

@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace ILSPMS.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api/users")]
     public class UserController : ApiControllerBase
     {
@@ -74,7 +74,6 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Admin, Division Officer")]
         [Route("pms")]
         [HttpGet]
         public HttpResponseMessage GetPMs(HttpRequestMessage request, string filter = null)
@@ -118,7 +117,6 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Admin")]
         [Route("new")]
         [HttpPost]
         public HttpResponseMessage Create(HttpRequestMessage request, UserViewModel model)
@@ -176,7 +174,6 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Admin")]
         [Route("edit")]
         [HttpPost]
         public HttpResponseMessage Update(HttpRequestMessage request, UserViewModel model)
@@ -217,7 +214,6 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Admin")]
         [Route("remove")]
         [HttpPost]
         public HttpResponseMessage Archive(HttpRequestMessage request, UserViewModel model)
@@ -243,7 +239,6 @@ namespace ILSPMS.Web.Controllers
             });
         }
 
-        [Authorize(Roles = "Admin")]
         [Route("lockunlock")]
         [HttpPost]
         public HttpResponseMessage ToggleLock(HttpRequestMessage request, UserViewModel model)

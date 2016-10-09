@@ -31,49 +31,49 @@
                 templateUrl: "js/app/user/users.html",
                 controller: "usersCtrl",
                 menu: '#menuUsers',
-                resolve: isLoggedAdmin
+                resolve: { allowed: isLoggedAdmin }
             })
             .when("/divisions", {
                 title: 'Divisions Management',
                 templateUrl: "js/app/division/divisions.html",
                 controller: "divisionsCtrl",
-                menu: '#menuUsers',
-                resolve: isLoggedAdmin
+                menu: '#menuDivisions',
+                resolve: { allowed: isLoggedAdmin }
             })
             .when("/projects", {
                 title: 'Projects Management',
                 templateUrl: "js/app/project/projects.html",
                 controller: "projectsCtrl",
                 menu: '#menuProjects',
-                resolve: isLoggedAdmin
+                resolve: { allowed: isLoggedAdmin }
             })
             .when("/my-projects", {
                 title: 'My Projects',
                 templateUrl: "js/app/myproject/myProjects.html",
                 controller: "myProjectsCtrl",
                 menu: '#menuMyProjects',
-                resolve: isLoggedNotAdmin
+                resolve: { allowed: isLoggedNotAdmin }
             })
             .when("/my-approvals", {
                 title: 'Projects for Approval',
                 templateUrl: "js/app/myproject/myProjects.html",
                 controller: "myApprovalsCtrl",
                 menu: '#menuMyApprovals',
-                resolve: isLoggedNotAdminNotPM
+                resolve: { allowed: isLoggedNotAdminNotPM }
             })
             .when("/project-movements/:id", {
                 title: 'My Projects',
                 templateUrl: "js/app/movement/movements.html",
                 controller: "movementsCtrl",
                 menu: '#menuMyProjects',
-                resolve: isLoggedNotAdmin
+                resolve: { allowed: isLoggedNotAdmin }
             })
             .when("/project-activities/:id", {
                 title: 'My Projects',
                 templateUrl: "js/app/activity/activities.html",
                 controller: "activitiesCtrl",
                 menu: '#menuMyProjects',
-                resolve: isLoggedNotAdmin
+                resolve: { allowed: isLoggedNotAdmin }
             })
             .otherwise({ redirectTo: "/" });
 
@@ -92,8 +92,6 @@
         if ($rootScope.repository.loggedUser) {
             $http.defaults.headers.common['Authorization'] = $rootScope.repository.loggedUser.authdata;
             $http.defaults.headers.common['Roles'] = $rootScope.repository.loggedUser.role;
-            if ($rootScope.repository.loggedUser.isImpersonated)
-                $http.defaults.headers.common['ImpersonatedClientID'] = $rootScope.repository.loggedUser.id;
         }
 
         // route
@@ -136,7 +134,6 @@
     }
 
     isAuthenticated.$inject = ['membershipService', '$rootScope', '$location'];
-
     function isAuthenticated(membershipService, $rootScope, $location) {
         if (!membershipService.isUserLoggedIn()) {
             $rootScope.previousState = $location.path();
@@ -144,25 +141,25 @@
         }
     }
 
-    function isLoggedAdmin(membershipService, $rootScope, $location, $q) {
+    var isLoggedAdmin = ['membershipService', '$rootScope', '$location', '$q', function (membershipService, $rootScope, $location, $q) {
         var deferred = $q.defer();
         if ($rootScope.repository.loggedUser.role != 1) {
             return deferred.promise;
         }
-    }
+    }];
 
-    function isLoggedNotAdmin(membershipService, $rootScope, $location, $q) {
+    var isLoggedNotAdmin = ['membershipService', '$rootScope', '$location', '$q', function (membershipService, $rootScope, $location, $q) {
         var deferred = $q.defer();
         if ($rootScope.repository.loggedUser.role == 1) {
             return deferred.promise;
         }
-    }
+    }];
 
-    function isLoggedNotAdminNotPM(membershipService, $rootScope, $location, $q) {
+    var isLoggedNotAdminNotPM = ['membershipService', '$rootScope', '$location', '$q', function (membershipService, $rootScope, $location, $q) {
         var deferred = $q.defer();
         if ($rootScope.repository.loggedUser.role == 1 || $rootScope.repository.loggedUser.role == 2) {
             return deferred.promise;
         }
-    }
+    }];
 
 })();
