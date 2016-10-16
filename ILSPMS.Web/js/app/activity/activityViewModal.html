@@ -10,7 +10,8 @@
                         <div class="row">
                             <div class="col-xs-12 selectContainer">
                                 <label class="control-label" for="activity">Activity</label>
-                                <input type="text" class="form-control" ng-model="viewModel.Activity" name="activity" id="activity" placeholder="Activity done"
+                                <input type="text" class="form-control" ng-model="viewModel.Activity" name="activity" id="activity" 
+                                       placeholder="Activity done" ng-disabled="!canAdd && IsSubmitted"
                                        validate-on="blur" required required-message="'Activity is required'">
                             </div>
                         </div>
@@ -19,7 +20,8 @@
                         <div class="row">
                             <div class="col-xs-12 selectContainer">
                                 <label class="control-label" for="budget">Allocated budget</label>
-                                <input type="number" class="form-control" ng-model="viewModel.BudgetUtilized" name="budget" id="budget" placeholder="0" min="0"
+                                <input type="number" class="form-control" ng-model="viewModel.BudgetUtilized" name="budget" 
+                                       id="budget" placeholder="0" min="0" ng-disabled="!canAdd && IsSubmitted"
                                        validate-on="blur" required required-message="'Budget is required'">
                             </div>
                         </div>
@@ -30,7 +32,7 @@
     </div>
     <div class="panel-footer clearfix">
         <div class="pull-right">
-            <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="fillupForm.$invalid || dataLoading">{{viewModel.ID > 0 ? "Update" : "Create"}}</button>
+            <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="fillupForm.$invalid || dataLoading" ng-if="canAdd && !IsSubmitted">{{viewModel.ID > 0 ? "Update" : "Create"}}</button>
             <button type="button" class="btn btn-default" ng-click="close()" ng-disabled="dataLoading">Close</button>
         </div>
     </div>

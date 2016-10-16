@@ -1,0 +1,45 @@
+﻿<div class="clearfix">
+    <div class="view-header">
+        <div class="input-group pull-left ms20" ng-if="isDirector">
+            <select class="form-control" ng-model="$parent.divisionID">
+                <option value="0" label="All divisions" selected>All Divisions</option>
+                <option ng-repeat="row in divisions track by $index" label="{{row.Name}}" value="{{row.ID}}">{{row.Name}}</option>
+            </select>
+        </div>
+        <div class="input-group pull-left">
+            <select class="form-control" ng-model="selectedYear">
+                <option ng-repeat="row in years" label="{{row}}" value="{{row}}">{{row}}</option>
+            </select>
+        </div>
+        <div class="input-group pull-left ms20">
+            <a class="btn btn-primary" ng-click="generate()">GENERATE REPORT</a>
+        </div>
+    </div>
+    <div class="boxes-container report">
+        <div ng-repeat="div in data track by $index">
+            <div class="title mt10">{{div.Division.Name}}</div>
+            <div>
+                <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                    <thead>
+                        <tr class="headings">
+                            <th>Name </th>
+                            <th>ProjectManager </th>
+                            <th>Budget (Php) </th>
+                            <th>Utilized (Php) </th>
+                            <th>% Utilized </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in div.Projects">
+                            <td class="col-sm-3">{{row.Name}}</td>
+                            <td class="col-sm-2">{{row.ProjectManager}}</td>
+                            <td class="col-sm-2">{{row.Budget | number:2}}</td>
+                            <td class="col-sm-2">{{row.BudgetUtilized | number:2}}</td>
+                            <td class="col-sm-2">{{(row.BudgetUtilized / row.Budget) * 100 | number:2}} %</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

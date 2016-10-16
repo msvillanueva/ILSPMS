@@ -75,6 +75,13 @@
                 menu: '#menuMyProjects',
                 resolve: { allowed: isLoggedNotAdmin }
             })
+            .when("/reports", {
+                title: 'Reports',
+                templateUrl: "js/app/reports/reports.html",
+                controller: "reportsCtrl",
+                menu: '#menuReports',
+                resolve: { allowed: isLoggedNotAdminNotPM }
+            })
             .otherwise({ redirectTo: "/" });
 
     }

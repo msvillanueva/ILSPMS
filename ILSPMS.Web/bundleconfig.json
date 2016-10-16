@@ -61,7 +61,8 @@
       "js/app/myproject/**/*.js",
       "js/app/profile/**/*.js",
       "js/app/movement/**/*.js",
-      "js/app/activity/**/*.js"
+      "js/app/activity/**/*.js",
+      "js/app/reports/**/*.js"
     ]
   }
 ]
