@@ -17,8 +17,19 @@
     </div>
     <div class="boxes-container report">
         <div ng-repeat="div in data track by $index">
-            <div class="title mt10">{{div.Division.Name}}</div>
-            <div>
+            <div class="report-title mt10">
+                <table class="w10">
+                    <tr>
+                        <td class="col-sm-5" colspan="2">{{div.Division.Name}}</td>
+                        <td class="col-sm-2 no-padding">Php {{div.TotalBudget | number:2}}</td>
+                        <td class="col-sm-2 no-padding">Php {{div.TotalBudgetAllocated | number:2}}</td>
+                        <td class="col-sm-2 no-padding">{{div.BudgetUtilized | number:2}} %</td>
+                        <td class="col-sm-1 text-right"><strong>TOTAL</strong></td>
+                    </tr>
+                </table>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="report">
                 <table class="table table-striped responsive-utilities jambo_table bulk_action">
                     <thead>
                         <tr class="headings">
@@ -27,6 +38,7 @@
                             <th>Budget (Php) </th>
                             <th>Utilized (Php) </th>
                             <th>% Utilized </th>
+                            <th>% Completion </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +48,7 @@
                             <td class="col-sm-2">{{row.Budget | number:2}}</td>
                             <td class="col-sm-2">{{row.BudgetUtilized | number:2}}</td>
                             <td class="col-sm-2">{{(row.BudgetUtilized / row.Budget) * 100 | number:2}} %</td>
+                            <td class="col-sm-1">{{(row.MilestoneOrder / topMilestone) * 100 | number:2}} %</td>
                         </tr>
                     </tbody>
                 </table>

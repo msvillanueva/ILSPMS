@@ -226,6 +226,8 @@
     <Content Include="js\app\division\divisionViewModal.html" />
     <Content Include="js\app\division\divisionViewModalCtrl.js" />
     <Content Include="js\app\login.js" />
+    <Content Include="js\app\login\forgotPassword.html" />
+    <Content Include="js\app\login\forgotPasswordCtrl.js" />
     <Content Include="js\app\login\loginForm.html" />
     <Content Include="js\app\login\loginFormCtrl.js" />
     <Content Include="js\app\modules\common.core.js" />

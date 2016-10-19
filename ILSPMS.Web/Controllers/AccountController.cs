@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ILSPMS.Common;
 using ILSPMS.Data;
 using ILSPMS.Entities;
 using ILSPMS.Services;
@@ -132,6 +133,47 @@ namespace ILSPMS.Web.Controllers
                     _unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK, new { success = true });
+                }
+                else
+                    response = request.CreateResponse(HttpStatusCode.OK, new { success = false });
+
+                return response;
+            });
+        }
+
+        [AllowAnonymous]
+        [Route("forgot")]
+        [HttpPost]
+        public HttpResponseMessage SendForgotPassword(HttpRequestMessage request, UserViewModel user)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (ModelState.IsValid)
+                {
+                    var account = _userRepository.GetSingleByUsername(user.Email);
+                    if (account != null)
+                    {
+                        var newPassword = _encryptionService.GenerateCode(6);
+                        account.Salt = _encryptionService.CreateSalt();
+                        account.HashedPassword = _encryptionService.EncryptPassword(newPassword, account.Salt);
+                        _unitOfWork.Commit();
+
+                        var email = new EmailSender()
+                        {
+                            RecipientName = $"{account.FirstName} {account.LastName}",
+                            To = new List<string>() { account.Email }
+                        };
+                        email.SendForgotPasswordAsync(newPassword);
+
+                        response = request.CreateResponse(HttpStatusCode.OK, new { success = true });
+                    }
+                    else
+                    {
+                        response = request.CreateResponse(HttpStatusCode.OK, new { success = false, message = user.Email + " is not yet registered." });
+                    }
+
                 }
                 else
                     response = request.CreateResponse(HttpStatusCode.OK, new { success = false });

@@ -50,6 +50,15 @@ namespace ILSPMS.Services
                             ProjectManagerID = (int)project.ProjectManagerID
                         };
                         project.ProjectMovements.Add(forApprovalMovement);
+
+                        var email = new EmailSender()
+                        {
+                            RecipientName = EnumerationHelper.GetEnumDescription(((Enumerations.Role)initialApproverFlow.ApproverRoleID)),
+                            To = new List<string>(initialApproverFlow.ApproverRole.Users
+                                .Where(s => (s.RoleID == 3 && s.DivisionID == project.DivisionID) || s.RoleID != 3)
+                                .Select(s => s.Email).ToList())
+                        };
+                        email.SendRequestForApproval($"{project.ProjectManager.FirstName} {project.ProjectManager.LastName}", project.Name);
                     }
                 }
                 else //next approver if any
@@ -74,6 +83,15 @@ namespace ILSPMS.Services
                             ProjectManagerID = (int)project.ProjectManagerID
                         };
                         project.ProjectMovements.Add(forNextApprovalMovement);
+
+                        var email = new EmailSender()
+                        {
+                            RecipientName = EnumerationHelper.GetEnumDescription(((Enumerations.Role)approverFlow.NextApproverRoleID)),
+                            To = new List<string>(approverFlow.NextApproverRole.Users
+                                .Where(s => (s.RoleID == 3 && s.DivisionID == project.DivisionID) || s.RoleID != 3)
+                                .Select(s => s.Email).ToList())
+                        };
+                        email.SendRequestForApproval($"{project.ProjectManager.FirstName} {project.ProjectManager.LastName}", project.Name);
                     }
                     else
                     {

@@ -33,5 +33,64 @@ namespace ILSPMS.Common
 
             new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "ILS-PMS new account", body.ToString(), true, true); }).Start();
         }
+
+        public void SendForgotPasswordAsync(string password)
+        {
+            var body = new StringBuilder();
+            body.Append($"Dear {this.RecipientName}, {br}{br}");
+            body.Append($"You have requested for a password reset. {br}");
+            body.Append($"Your new password is {password}. {br}{br}");
+            body.Append($"Best regards, {br}");
+            body.Append("The ILS Team");
+
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "Password reset", body.ToString(), true, true); }).Start();
+        }
+
+        public void SendNewProject(string project)
+        {
+            var body = new StringBuilder();
+            body.Append($"Dear {this.RecipientName}, {br}{br}");
+            body.Append($"A new project has been assigned to you. {br}");
+            body.Append($"Project name: {project}. {br}");
+            body.Append($"Kindly login to the system to view the project. {br}{br}");
+            body.Append($"Best regards, {br}");
+            body.Append("The ILS Team");
+
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "New project", body.ToString(), true, true); }).Start();
+        }
+
+        public void SendRequestForApproval(string pm, string project)
+        {
+            var body = new StringBuilder();
+            body.Append($"Dear {this.RecipientName}, {br}{br}");
+            body.Append($"{pm} has requested your approval for project {project}. {br}");
+            body.Append($"Kindly login to the system to view the project. {br}{br}");
+            body.Append($"Best regards, {br}");
+            body.Append("The ILS Team");
+
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "Approval request", body.ToString(), true, true); }).Start();
+        }
+
+        public void SendApproved(string approver, string project)
+        {
+            var body = new StringBuilder();
+            body.Append($"Dear {this.RecipientName}, {br}{br}");
+            body.Append($"Your request for approval in project {project} has been granted by {approver}. {br}{br}");
+            body.Append($"Best regards, {br}");
+            body.Append("The ILS Team");
+
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "Approval granted", body.ToString(), true, true); }).Start();
+        }
+
+        public void SendDeclined(string approver, string project)
+        {
+            var body = new StringBuilder();
+            body.Append($"Dear {this.RecipientName}, {br}{br}");
+            body.Append($"Your request for approval in project {project} has been denied by {approver}. {br}{br}");
+            body.Append($"Best regards, {br}");
+            body.Append("The ILS Team");
+
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "Approval declined", body.ToString(), true, true); }).Start();
+        }
     }
 }

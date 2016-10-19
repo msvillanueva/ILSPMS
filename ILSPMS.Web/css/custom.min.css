@@ -291,6 +291,23 @@ th[st-sort]:hover {
     content: '\25BC';
 }
 
+.report .table.jambo_table thead {
+    background: #688092 !important;
+    color: #ECF0F1;
+}
+
+.report-title {
+    background: #34414a;
+    color: #ECF0F1;
+    padding:5px 0px;
+    font-size:16px;
+    position:relative;
+    width:100%;
+}
+.report-title table {
+    width:100%;
+}
+
 .boxes-container {
     position: fixed;
     overflow-y: auto;

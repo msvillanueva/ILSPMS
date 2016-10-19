@@ -123,42 +123,43 @@ namespace ILSPMS.Web.Controllers
         {
             return CreateHttpResponse(request, () =>
             {
-            HttpResponseMessage response = null;
+                HttpResponseMessage response = null;
 
-            if (ModelState.IsValid)
-            {
-                if (_userRepository.FindBy(s => s.Email.Trim().ToLower() == model.Email.ToLower().Trim()).FirstOrDefault() == null)
+                if (ModelState.IsValid)
                 {
-                    var salt = _encryptionService.CreateSalt();
-                    var pass = _encryptionService.GenerateCode(6);
-                    var newUser = new User()
+                    if (_userRepository.FindBy(s => s.Email.Trim().ToLower() == model.Email.ToLower().Trim()).FirstOrDefault() == null)
                     {
-                        DivisionID = model.DivisionID,
-                        LastName = model.LastName,
-                        FirstName = model.FirstName,
-                        Username = "",
-                        Email = model.Email,
-                        HashedPassword = _encryptionService.EncryptPassword(pass, salt),
-                        Salt = salt,
-                        RoleID = model.RoleID,
-                        IsLocked = false,
-                        Deleted = false,
-                        DateCreated = DateTime.Now
-                    };
+                        var salt = _encryptionService.CreateSalt();
+                        var pass = _encryptionService.GenerateCode(6);
+                        var newUser = new User()
+                        {
+                            DivisionID = model.DivisionID,
+                            LastName = model.LastName,
+                            FirstName = model.FirstName,
+                            Username = "",
+                            Email = model.Email,
+                            HashedPassword = _encryptionService.EncryptPassword(pass, salt),
+                            Salt = salt,
+                            RoleID = model.RoleID,
+                            IsLocked = false,
+                            Deleted = false,
+                            DateCreated = DateTime.Now
+                        };
 
-                    _userRepository.Add(newUser);
-                    _unitOfWork.Commit();
+                        _userRepository.Add(newUser);
+                        _unitOfWork.Commit();
 
-                    var email = new EmailSender()
-                    {
-                        RecipientName = $"{model.FirstName} {model.LastName}",
-                        To = new List<string>() { model.Email }
-                    };
-                    //email.SendAcceptRegistrationAsync(pass);
-                    var objUser = _userRepository.GetSingle(newUser.ID);
-                    var userVM = Mapper.Map<UserViewModel>(objUser);
-                    userVM.DivisionName = model.DivisionID.HasValue ? _divisionRepository.GetSingle((int)model.DivisionID).Name : "";
-                    userVM.RoleName = EnumerationHelper.GetEnumDescription((Enumerations.Role)model.RoleID);
+                        var email = new EmailSender()
+                        {
+                            RecipientName = $"{model.FirstName} {model.LastName}",
+                            To = new List<string>() { model.Email }
+                        };
+                        email.SendAcceptRegistrationAsync(pass);
+
+                        var objUser = _userRepository.GetSingle(newUser.ID);
+                        var userVM = Mapper.Map<UserViewModel>(objUser);
+                        userVM.DivisionName = model.DivisionID.HasValue ? _divisionRepository.GetSingle((int)model.DivisionID).Name : "";
+                        userVM.RoleName = EnumerationHelper.GetEnumDescription((Enumerations.Role)model.RoleID);
 
                         response = request.CreateResponse(HttpStatusCode.OK, new { success = true, item = userVM });
                     }

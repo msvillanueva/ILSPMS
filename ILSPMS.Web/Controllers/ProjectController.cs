@@ -141,6 +141,8 @@ namespace ILSPMS.Web.Controllers
                     if (model.ID > 0)
                     {
                         var project = _projectRepository.GetSingle(model.ID);
+                        var hasPmAssigend = project.ProjectManagerID > 0;
+
                         if (project != null)
                         {
                             project.Name = model.Name;
@@ -150,6 +152,18 @@ namespace ILSPMS.Web.Controllers
                             _projectRepository.Edit(project);
                             _unitOfWork.Commit();
                         }
+
+                        if (!hasPmAssigend && model.ProjectManagerID > 0)
+                        {
+                            var _pm = _userRepository.GetSingle((int)model.ProjectManagerID);
+                            var email = new EmailSender()
+                            {
+                                RecipientName = $"{_pm.FirstName} {_pm.LastName}",
+                                To = new List<string>() { _pm.Email }
+                            };
+                            email.SendNewProject(project.Name);
+                        }
+
                     }
                     else
                     {
@@ -167,6 +181,18 @@ namespace ILSPMS.Web.Controllers
                         _projectRepository.Add(project);
                         _unitOfWork.Commit();
                         model.ID = project.ID;
+
+                        if (model.ProjectManagerID > 0)
+                        {
+                            var _pm = _userRepository.GetSingle((int)model.ProjectManagerID);
+                            var email = new EmailSender()
+                            {
+                                RecipientName = $"{_pm.FirstName} {_pm.LastName}",
+                                To = new List<string>() { _pm.Email }
+                            };
+                            email.SendNewProject(project.Name);
+                        }
+
                     }
                     var obj = _projectRepository.GetSingle(model.ID);
                     var item = Mapper.Map<NewProjectMovementViewModel>(obj);
@@ -283,6 +309,13 @@ namespace ILSPMS.Web.Controllers
                         project.Approve(currentUser);
                         _unitOfWork.Commit();
                         _projectService.Submit(project);
+
+                        var email = new EmailSender()
+                        {
+                            RecipientName = $"{project.ProjectManager.FirstName} {project.ProjectManager.LastName}",
+                            To = new List<string>() { project.ProjectManager.Email }
+                        };
+                        email.SendApproved($"{currentUser.FirstName} {currentUser.LastName}", project.Name);
                     }
 
                     var obj = _projectRepository.GetSingle(model.ID);
@@ -314,6 +347,13 @@ namespace ILSPMS.Web.Controllers
                     {
                         project.Decline(currentUser);
                         _unitOfWork.Commit();
+
+                        var email = new EmailSender()
+                        {
+                            RecipientName = $"{project.ProjectManager.FirstName} {project.ProjectManager.LastName}",
+                            To = new List<string>() { project.ProjectManager.Email }
+                        };
+                        email.SendDeclined($"{currentUser.FirstName} {currentUser.LastName}", project.Name);
                     }
 
                     var obj = _projectRepository.GetSingle(model.ID);
