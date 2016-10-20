@@ -13,6 +13,7 @@
         </div>
         <div class="input-group pull-left ms20">
             <a class="btn btn-primary" ng-click="generate()">GENERATE REPORT</a>
+            <a class="btn btn-primary" ng-click="downloadPdf()" ng-if="data.length > 0">DOWNLOAD REPORT (PDF)</a>
         </div>
     </div>
     <div class="boxes-container report">
@@ -33,8 +34,8 @@
                 <table class="table table-striped responsive-utilities jambo_table bulk_action">
                     <thead>
                         <tr class="headings">
-                            <th>Name </th>
-                            <th>ProjectManager </th>
+                            <th>Project Name </th>
+                            <th>Project Manager </th>
                             <th>Budget (Php) </th>
                             <th>Utilized (Php) </th>
                             <th>% Utilized </th>

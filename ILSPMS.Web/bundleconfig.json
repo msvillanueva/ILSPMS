@@ -35,7 +35,9 @@
       "js/vendors/angular-aria.js",
       "js/vendors/angular-material.js",
       "js/vendors/Chart.js",
-      "js/vendors/angular-chart.js"
+      "js/vendors/angular-chart.js",
+      "js/vendors/pdfmake.js",
+      "js/vendors/vfs_fonts.js"
     ]
   },
   {
