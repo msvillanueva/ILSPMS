@@ -10,6 +10,15 @@
         $scope.projects = [];
         $scope.tableRowCollection = [];
         $scope.topMilestone = 0;
+        $scope.forApproval = false;
+        $scope.divisions = [];
+        $scope.divisionID = '0';
+        $scope.years = [];
+        $scope.selectedYear = $scope.year.toString();
+        $scope.viewby = 6;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
@@ -25,12 +34,12 @@
 
         function search() {
             $scope.loadingData = true;
-
             var config = {
                 params: {
                     filter: $scope.filter,
-                    all: $scope.all,
-                    forApproval: true
+                    year: $scope.selectedYear,
+                    forApproval: $scope.forApproval,
+                    divisionID: $scope.divisionID
                 }
             };
 
@@ -92,7 +101,26 @@
             row.Hovered = false;
         }
 
-        $scope.search();
+        function init() {
+            if ($scope.isDirector) {
+                apiService.get('/api/divisions/', null,
+                    function (result) {
+                        $scope.divisions = result.data.items;
+                    },
+                    notificationService.responseFailed);
+            }
+
+            apiService.post('/api/projects/years', null,
+                function (result) {
+                    $scope.years = result.data.items;
+
+                },
+                notificationService.responseFailed);
+
+            $scope.search();
+        }
+
+        init();
     }
 
 })(angular.module('ilsApp'));

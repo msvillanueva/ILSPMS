@@ -9,7 +9,9 @@
             </select>
         </div>
         <div class="input-group pull-right">
-            <input class="form-control w20" type="checkbox" value="all" id="chkAll" ng-model="all" ng-click="search()" /><label for="chkAll" class="form-control">Show previous projects</label>
+            <select class="form-control" ng-model="selectedYear" ng-change="search()">
+                <option ng-repeat="row in years" label="{{row}}" value="{{row}}">{{row}}</option>
+            </select>
         </div>
     </div>
     <div class="mt20">

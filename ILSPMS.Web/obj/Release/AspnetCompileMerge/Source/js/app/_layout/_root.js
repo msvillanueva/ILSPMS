@@ -14,6 +14,7 @@
         $scope.isAdmin = false;
         $scope.isPM = false;
         $scope.isDiv = false;
+        $scope.isDirector = false;
         $scope.year = (new Date()).getFullYear();
 
         $scope.displayUserInfo = displayUserInfo;
@@ -30,7 +31,8 @@
                 $scope.userData.id = $rootScope.repository.loggedUser.id;
                 $scope.isAdmin = $rootScope.repository.loggedUser.role == 1;
                 $scope.isPM = $rootScope.repository.loggedUser.role == 2;
-                $scope.isPM = $rootScope.repository.loggedUser.role == 3;
+                $scope.isDiv = $rootScope.repository.loggedUser.role == 3;
+                $scope.isDirector = $rootScope.repository.loggedUser.role == 4 || $rootScope.repository.loggedUser.role == 5;
             }
             else {
                 logout();

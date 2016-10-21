@@ -7,6 +7,12 @@
                     <span class="tooltiptext tooltip-right">Dashboard</span>
                 </a>
             </li>
+            <li class="sm-active menu-item tooltip-nav" id="menuDivisions" ng-if="isAdmin">
+                <a ng-href="#/divisions">
+                    <i class="fa fa-building"></i>
+                    <span class="tooltiptext tooltip-right">Division management</span>
+                </a>
+            </li>
             <li class="sm-active menu-item tooltip-nav" id="menuUsers" ng-if="isAdmin">
                 <a ng-href="#/users">
                     <i class="fa fa-users"></i>
@@ -23,6 +29,18 @@
                 <a ng-href="#/my-projects">
                     <i class="fa fa-folder"></i>
                     <span class="tooltiptext tooltip-right">My Projects</span>
+                </a>
+            </li>
+            <li class="sm-active menu-item tooltip-nav" id="menuMyApprovals" ng-if="!isAdmin && !isPM">
+                <a ng-href="#/my-approvals">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="tooltiptext tooltip-right">Projects for approval</span>
+                </a>
+            </li>
+            <li class="sm-active menu-item tooltip-nav" id="menuReports" ng-if="!isAdmin && !isPM">
+                <a ng-href="#/reports">
+                    <i class="fa fa-file"></i>
+                    <span class="tooltiptext tooltip-right">Reports</span>
                 </a>
             </li>
         </ul>

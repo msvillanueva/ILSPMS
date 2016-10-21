@@ -1,6 +1,17 @@
 ﻿<div class="clearfix">
     <div class="view-header">
         <search-bar></search-bar>
+        <div class="input-group pull-right ms20" ng-if="isDirector && !forApproval">
+            <select class="form-control" ng-model="$parent.divisionID" ng-change="search()">
+                <option value="0" label="All divisions" selected>All Divisions</option>
+                <option ng-repeat="row in divisions" label="{{row.Name}}" value="{{row.ID}}">{{row.Name}}</option>
+            </select>
+        </div>
+        <div class="input-group pull-right {{isDirector ? '' : 'ms20'}}" ng-if="!forApproval">
+            <select class="form-control" ng-model="$parent.selectedYear" ng-change="search()">
+                <option ng-repeat="row in years" label="{{row}}" value="{{row}}">{{row}}</option>
+            </select>
+        </div>
     </div>
     <div class="boxes-container">
         <div class="col-lg-12 mt20" ng-if="!loadingData && projects.length == 0">
@@ -11,7 +22,7 @@
             <i>&nbsp;Fetching data..</i>
             <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
         </div>
-        <div class="col-md-4 mt20" ng-repeat="row in projects">
+        <div class="col-md-4 mt20" ng-repeat="row in projects.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
             <div class="card-item" ng-mouseenter="popMenu($event, row)" ng-mouseleave="hideMenu($event, row)">
                 <div class="card-title ps10">
                     {{row.Name}}
@@ -38,7 +49,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-icon-wrapper"><i class="fa fa-money"></i></div>
-                            {{row.Budget  | currency:'P ':2}}
+                            Php {{row.BudgetUtilized  | currency:'':2}} / {{row.Budget  | currency:'':2}}
                         </div>
                     </div>
                     <div class="row">
@@ -71,11 +82,11 @@
                         <i class="fa fa-sign-in"></i>
                         <span class="tooltiptext tooltip-left">Commit</span>
                     </a>
-                    <a class="btn btn-success mt10 tooltip-nav" ng-click="approve(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role">
+                    <a class="btn btn-success mt10 tooltip-nav" ng-click="approve(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role && forApproval">
                         <i class="fa fa-thumbs-o-up"></i>
                         <span class="tooltiptext tooltip-left">Approve</span>
                     </a>
-                    <a class="btn btn-danger mt10 tooltip-nav" ng-click="disapprove(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role">
+                    <a class="btn btn-danger mt10 tooltip-nav" ng-click="decline(row)" ng-if="row.LockSubmit && row.ApproverRoleID == role && forApproval">
                         <i class="fa fa-thumbs-o-down"></i>
                         <span class="tooltiptext tooltip-left">Disapprove</span>
                     </a>
@@ -84,11 +95,16 @@
                         <span class="tooltiptext tooltip-left">Movements</span>
                     </a>
                     <a class="btn btn-default mt10 tooltip-nav" ng-href="#/project-activities/{{row.ID}}">
-                        <i class="fa fa-file-text-o"></i>
+                        <i class="fa fa-pencil-square-o"></i>
                         <span class="tooltiptext tooltip-left">Activities</span>
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="clearfix text-center" ng-hide="projects.length <= itemsPerPage">
+            <uib-pagination total-items="projects.length" ng-model="currentPage" 
+                        class="pagination" items-per-page="itemsPerPage">
+            </uib-pagination>
         </div>
     </div>
 </div>

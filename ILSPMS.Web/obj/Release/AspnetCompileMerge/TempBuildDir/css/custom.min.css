@@ -9,7 +9,7 @@
 
 .blu {
     width: 100%;
-    background: #cfcdfe;
+    background: #fefefe;
     clear: both;
     height: 100%;
 }
@@ -39,7 +39,7 @@
 .login_box {
     float: left;
     position: relative;
-    background: #aba8de;
+    background: #688092;
     min-height: 683px;
     width: 40%;
     z-index: 9;
@@ -65,16 +65,30 @@
     position: absolute;
     pointer-events: none;
     border-color: rgba(214, 214, 214, 0);
-    border-left-color: #aba8de;
+    border-left-color: #688092;
     border-width: 50px;
     margin-top: -50px;
 }
 
 .arrow_box {
     float: left;
-    width: 50%;
+    width: 60%;
     padding: 2%;
-    margin-left: 10%;
+    margin-left: 0;
+}
+
+.arrow_box .fa {
+    background-color:#81c0f4;
+    border:0;
+    color:#666;
+}
+
+.arrow_box img {
+    width:100%;
+}
+
+.width100 {
+    width:100% !important;
 }
 
 #login #wrapper {
@@ -90,7 +104,17 @@
 
 .clearfix.blu {
     border-top:3px solid #ffd3aa;
+    position:relative;
 }
+.clearfix.blu .login-filler {
+    width:40%;
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    background-color:#688092;
+}
+
 
 /*SIDE BAR*/
 .left_col {
@@ -249,6 +273,7 @@
     left:60px;
     right:0;
     padding:30px 20px 10px 20px;
+    overflow-y:auto;
 }
 .page > div {
     clear:both;
@@ -290,13 +315,31 @@ th[st-sort]:hover {
     content: '\25BC';
 }
 
+.report .table.jambo_table thead {
+    background: #688092 !important;
+    color: #ECF0F1;
+}
+
+.report-title {
+    background: #34414a;
+    color: #ECF0F1;
+    padding:5px 0px;
+    font-size:16px;
+    position:relative;
+    width:100%;
+}
+.report-title table {
+    width:100%;
+}
+
 .boxes-container {
     position: fixed;
     overflow-y: auto;
-    top: 100px;
+    top: 110px;
     bottom: 25px;
     right: 0px;
     left: 80px;
+    padding-bottom: 20px;
 }
 
 .card-item {
@@ -365,10 +408,10 @@ md-progress-linear.card-progress {
 .milestone-card {
     height:80px;
     float:left;
-    margin-right:15px;
+    margin-right:10px;
     background-color:#b9f6ca;
     position: relative;
-    width:200px;
+    width:130px;
 }
     .milestone-card::after {
         content: "";
@@ -402,7 +445,7 @@ md-progress-linear.card-progress {
 }
 
 .milestone-title {
-    margin:0 0 0 70px;
+    margin:0 0 0 55px;
     position:absolute;
     font-weight:bold;
     z-index:3;
@@ -508,12 +551,67 @@ body {
   animation:         loading-bar-spinner 400ms linear infinite;
 }
 
+/* ROUND BUTTONS*/
+.main-colored-buttons .cont {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
 
+    .main-colored-buttons .cont:hover {
+        opacity: 0.5 !important;
+    }
 
+    .main-colored-buttons .cont .badge {
+        position: relative;
+        z-index: 1;
+        top: -45px;
+        border-radius: 100%;
+        padding: 5px;
+        border: 2px solid #fff !important;
+        min-width:26px;
+    }
+
+.main-colored-buttons a {
+    border: 1px solid !important;
+    text-align: center !important;
+    font-size: 40px;
+    float: left !important;
+    display: inline !important;
+    margin-right: 10px !important;
+    border-radius: 100% !important;
+    border: 2px solid #fff !important;
+    padding: 10px !important;
+    color: #fff !important;
+    margin-bottom: 20px !important;
+    width: 80px !important;
+    height: 80px !important;
+}
+
+    .main-colored-buttons a.gray {
+        background-color: #9b9b9b !important;
+    }
+
+    .main-colored-buttons a.yellow {
+        background-color: #efe684;
+    }
+
+    .main-colored-buttons a.blue {
+        background-color: #81c0f4;
+    }
+
+    .main-colored-buttons a.green {
+        background-color: #9adde0;
+    }
 
 
 .mt40 {
     margin-top: 40px;
+}
+
+.mt35 {
+    margin-top: 35px;
 }
 
 .mt20 {
@@ -527,6 +625,10 @@ body {
 .ms20 {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.m5  {
+    margin:5px;
 }
 
 .p20 {
@@ -591,10 +693,58 @@ input[type="checkbox"].form-control {
     box-shadow: none !important;
 }
 
+div.sticky-note {
+    color:#666;
+    min-height:100px !important;
+}
+    div.sticky-note .content {
+        padding: 30px 20px;
+    }
 
+    .gray {
+        background: #f5f5f5;
+    }
 
+    .green {
+        background: #b9f6ca;
+    }
 
+    .yellow {
+        background: #ffff8d;
+    }
 
+    .blue {
+        background: #84ffff;
+    }
+
+    .purple {
+        background: #b388ff;
+        color:#fff !important;
+    }
+
+    .red {
+        background: #ff8a80;
+        color:#fff !important;
+    }
+
+.title-bar {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    padding: 5px 10px;
+    color: #fff;
+    background: rgba(0,0,0,.18);
+    overflow: hidden;
+}
+
+.no-padding {
+    padding:0 !important;
+}
+
+.dashboard {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
 
 
 

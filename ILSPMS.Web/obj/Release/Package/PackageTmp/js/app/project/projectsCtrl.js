@@ -13,8 +13,9 @@
         $scope.tableRowCollection = [];
         $scope.pms = [];
         $scope.divisions = [];
-        $scope.all = false;
         $scope.divisionID = '0';
+        $scope.years = [];
+        $scope.selectedYear = $scope.year.toString();
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
@@ -31,8 +32,8 @@
             var config = {
                 params: {
                     filter: $scope.filter,
-                    all: $scope.all,
-                    divisionID: $scope.divisionID
+                    divisionID: $scope.divisionID,
+                    year: $scope.selectedYear
                 }
             };
             
@@ -99,6 +100,13 @@
             apiService.get('/api/users/pms', null,
                 function (result) {
                     $scope.pms = result.data.items;
+                },
+                notificationService.responseFailed);
+
+            apiService.post('/api/projects/years', null,
+                function (result) {
+                    $scope.years = result.data.items;
+
                 },
                 notificationService.responseFailed);
 

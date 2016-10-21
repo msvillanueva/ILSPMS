@@ -1,8 +1,121 @@
-﻿<div class="clearfix row mt40">
-    <div class="chart">
-        <div class="col-md-6"><div class="gray"></div></div>
-        <div class="col-md-6"><div class="gray"></div></div>
-        <div class="col-md-6"><div class="gray"></div></div>
-        <div class="col-md-6"><div class="gray"></div></div>
+﻿<div class="clearfix dashboard">
+    <div class="row" ng-if="!isAdmin">
+        <div class="col-lg-6">
+            <div class="col-lg-12">
+                <div class="main-colored-buttons">
+                    <div class="cont">
+                        <a class="yellow" ng-href="#/my-projects"><div><i class="fa fa-folder"></i></div></a>
+                        <span class="badge bg-red pull-right">{{projects.length}}</span>
+                    </div>
+                    <div class="cont" ng-if="!isPM">
+                        <a class="blue" ng-href="#/my-approvals"><div><i class="fa fa-thumbs-o-up"></i></div></a>
+                        <span class="badge bg-red pull-right">{{approvals}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 mt35">
+                <div class="title-bar">
+                    Project completion rate
+                </div>
+                <div class="chart-body">
+                    <div class="col-lg-12 mt20 absolute" ng-if="loadingData">
+                        <i>&nbsp;Generating chart</i>
+                        <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
+                    </div>
+                    <canvas id="doughnut" class="chart chart-doughnut" height="150" chart-options="cdOptions"
+                            chart-data="cdData" chart-labels="cdLabels" chart-colors="cdColors"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-12 mt20">
+                <div class="col-lg-6 no-padding">
+                    <div class="sticky-note green m5">
+                        <div class="content">
+                            Total number of project movements: {{totalMovements}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 no-padding">
+                    <div class="sticky-note yellow m5">
+                        <div class="content">
+                            Total number of project activities: {{totalActivities}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-6 no-padding" ng-if="forSubmit > 0">
+                <div class="sticky-note green m5">
+                    <div class="content">
+                        There are {{forSubmit}} project{{forSubmit > 1 ? 's' : ''}} that you can submit
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 no-padding" ng-if="approvals > 0">
+                <div class="sticky-note yellow m5">
+                    <div class="content">
+                        There are {{approvals}} project{{approvals > 1 ? 's' : ''}} that {{approvals > 1 ? 'are' : 'is'}} waiting for your approval
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 no-padding" ng-if="movements.length > 0">
+                <div class="sticky-note purple m5">
+                    <div class="title-bar">Recent project movements</div>
+                    <div class="content">
+                        <div class="row" ng-repeat="row in movements track by $index">
+                            <div class="col-lg-12">{{row}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="isAdmin">
+        <div class="col-lg-12">
+            <div class="main-colored-buttons">
+                <div class="cont">
+                    <a class="yellow" ng-href="#/projects"><div><i class="fa fa-folder"></i></div></a>
+                </div>
+                <div class="cont" ng-if="!isPM">
+                    <a class="blue" ng-href="#/users"><div><i class="fa fa-user"></i></div></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt20">
+            <div class="title-bar">
+                Project movements ({{year}})
+            </div>
+            <div class="chart-body mt20">
+                <div class="col-lg-12 mt20 absolute" ng-if="loadingData">
+                    <i>&nbsp;Generating chart</i>
+                    <div id="loading-spinner" class="pull-left"><div class="spinner-icon"></div></div>
+                </div>
+                <canvas id="chaMovements" class="chart chart-line" chart-data="cmData" height="70"
+                        chart-labels="cmLabels" chart-options="cmOptions"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-12 mt20">
+            <div class="col-lg-4 no-padding">
+                <div class="sticky-note green m5">
+                    <div class="content">
+                        There are <strong>{{allProjects}}</strong> total project{{allProjects > 1 ? 's' : ''}} on the system
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 no-padding">
+                <div class="sticky-note yellow m5">
+                    <div class="content">
+                        There are <strong>{{users}}</strong> user{{users > 1 ? 's' : ''}} on the system
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 no-padding">
+                <div class="sticky-note purple m5">
+                    <div class="content">
+                        There are <strong>{{projects}}</strong> project{{users > 1 ? 's' : ''}} for this year
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

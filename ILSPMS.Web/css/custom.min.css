@@ -72,15 +72,23 @@
 
 .arrow_box {
     float: left;
-    width: 50%;
+    width: 60%;
     padding: 2%;
-    margin-left: 10%;
+    margin-left: 0;
 }
 
 .arrow_box .fa {
     background-color:#81c0f4;
     border:0;
     color:#666;
+}
+
+.arrow_box img {
+    width:100%;
+}
+
+.width100 {
+    width:100% !important;
 }
 
 #login #wrapper {
@@ -96,7 +104,17 @@
 
 .clearfix.blu {
     border-top:3px solid #ffd3aa;
+    position:relative;
 }
+.clearfix.blu .login-filler {
+    width:40%;
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    background-color:#688092;
+}
+
 
 /*SIDE BAR*/
 .left_col {

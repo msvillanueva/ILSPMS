@@ -1,0 +1,44 @@
+﻿<div class="panel-primary">
+    <div class="panel-heading">
+        UPLOAD FILE
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <form role="form" angular-validator name="fillupForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 selectContainer">
+                                <label class="control-label" for="activity">Activity</label>
+                                <label class="form-control">{{activity.Activity}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 selectContainer">
+                                <label class="control-label" for="activity">Attachment name</label>
+                                <input type="text" class="form-control" ng-model="viewModel.Name" name="activity" id="activity" placeholder="Activity done"
+                                       validate-on="blur" required required-message="'Activity is required'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 selectContainer">
+                                <label class="control-label" for="activity">Attachment</label>
+                                <input type="file" ng-file-select="prepareFiles($files)">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="fillupForm.$invalid || dataLoading">{{viewModel.ID > 0 ? "Update" : "Create"}}</button>
+            <button type="button" class="btn btn-default" ng-click="close()" ng-disabled="dataLoading">Close</button>
+        </div>
+    </div>
+</div>
