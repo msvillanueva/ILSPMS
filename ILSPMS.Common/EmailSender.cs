@@ -24,14 +24,14 @@ namespace ILSPMS.Common
         {
             var body = new StringBuilder();
             body.Append($"Dear {this.RecipientName}, {br}{br}");
-            body.Append($"Welcome to ILS Project Monitoring System. {br}");
+            body.Append($"Welcome to ILS Project Lifecycle Monitoring System. {br}");
             body.Append($"Please use the following information when accessing your <a href='{ConfigurationManager.AppSettings["WebLink"]}'>web dashboard</a>. {br} {br}");
             body.Append($"Login = {this.To.First()} {br}");
             body.Append($"Password = {password} {br}{br}");
             body.Append($"Best regards, {br}");
             body.Append("The ILS Team");
 
-            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "ILS-PMS new account", body.ToString(), true, true); }).Start();
+            new Task(() => { Email.SendMail(this.To, Email.SenderName, Email.SenderEmail, "ILS-PLMS new account", body.ToString(), true, true); }).Start();
         }
 
         public void SendForgotPasswordAsync(string password)
