@@ -226,8 +226,10 @@ namespace ILSPMS.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var objUser = _userRepository.GetSingle(model.ID);
+                    var delEmail = $"{objUser.Email}_d{DateTime.Now.ToString("MMddyyyy")}";
                     if (objUser != null)
                     {
+                        objUser.Email = delEmail;
                         objUser.Deleted = true;
                     }
                     _unitOfWork.Commit();

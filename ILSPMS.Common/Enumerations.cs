@@ -24,10 +24,7 @@ namespace ILSPMS.Common
             DeputyExecDir = 4,
 
             [Description("Executive Director")]
-            ExecDir = 5,
-
-            [Description("APD")]
-            APD = 6
+            ExecDir = 5
         }
 
         public enum ProjectMovementType

@@ -14,6 +14,7 @@
         $scope.tableRowCollection = [];
         $scope.lastMilestoneID = 0;
         $scope.canAdd = false;
+        $scope.owned = false;
         $scope.IsSubmitted = false;
 
         $scope.showActivities = showActivities;
@@ -44,7 +45,8 @@
                 $scope.showActivities($scope.milestones[response.data.items.length - 1]);
                 $scope.lastMilestoneID = $scope.milestones[response.data.items.length - 1].MilestoneID;
                 $scope.setTitle(response.data.project.Name + ' | Activities');
-                $scope.canAdd = true;
+                $scope.owned = $scope.userData.id == response.data.project.ProjectManagerID;
+                $scope.canAdd = $scope.owned;
                 $scope.IsSubmitted = response.data.project.LockSubmit;
             }
             else {
@@ -61,7 +63,7 @@
 
             var card = angular.element(document.querySelector('#card' + row.MilestoneID));
             card.addClass('selected');
-            $scope.canAdd = $scope.lastMilestoneID == row.MilestoneID;
+            $scope.canAdd = $scope.lastMilestoneID == row.MilestoneID && $scope.owned;
         }
 
         function create(model) {

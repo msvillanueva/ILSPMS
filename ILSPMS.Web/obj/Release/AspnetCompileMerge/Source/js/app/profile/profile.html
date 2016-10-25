@@ -21,7 +21,7 @@
                         <label for="username" class="col-sm-3 control-label">Username</label>
                         <div class="col-sm-9" ng-if="!availableUsername">
                             <input type="text" class="form-control" ng-model="viewModel.Username" name="username" id="username" placeholder="Username"
-                                   validate-on="blur" required required-message="'Username is required'">
+                                   validate-on="blur" required required-message="'Username is required'" maxlength="20">
                             <p class="help-block">Please specify your username. Username can be used at login and cannot be changed once defined.</p>
                         </div>
                         <div class="col-sm-9" ng-if="availableUsername">
