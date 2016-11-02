@@ -45,7 +45,7 @@
                     <td>{{row.Name}}</td>
                     <td>{{row.DivisionName}}</td>
                     <td>{{row.ProjectManager}}</td>
-                    <td>{{row.Budget}}</td>
+                    <td>{{row.Budget | currency:'':2}}</td>
                     <td>{{row.Year}}</td>
                     <td class="last">
                         <a class="btn btn-default" ng-click="create(row)"><i class="fa fa-edit"></i> View</a>

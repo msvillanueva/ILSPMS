@@ -1,3 +1,4 @@
+D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\img\logo.png
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\roslyn\csc.exe
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -82,4 +83,3 @@ D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\zh-CN\FluentValidation.resources.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\obj\Release\ILSPMS.Web.csprojResolveAssemblyReference.cache
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\obj\Release\ILSPMS.Web.dll
 D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\obj\Release\ILSPMS.Web.pdb
-D:\Devz\PUPOU\ILSPMS\ILSPMS.Web\bin\img\logo.png
